@@ -44,6 +44,7 @@
     <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#esAdecuadoParaEvento -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#esAdecuadoParaEvento">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Plato"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoEvento"/>
         <rdfs:comment>Restriccion para saber si un plato es adeucado para un evento</rdfs:comment>
@@ -66,8 +67,9 @@
     <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#esDeTipoComida -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#esDeTipoComida">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Plato"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoComida"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoComidaPlato"/>
         <rdfs:comment>Relacion entre un plato y su tipo</rdfs:comment>
     </owl:ObjectProperty>
     
@@ -76,9 +78,31 @@
     <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#esFrioOCaliente -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#esFrioOCaliente">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Plato"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TemperaturaPlato"/>
         <rdfs:comment>Realciona un plato con su temperatura</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#esOrigenDe -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#esOrigenDe">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Plato"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#OrigenPlato"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#estiloCulinario -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#estiloCulinario">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Plato"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#EstiloCulinarioPlato"/>
+        <rdfs:comment>Relaciona plato con su estilo culinario</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -132,6 +156,7 @@
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#tieneEstilo">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Plato"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#EstiloDeComida"/>
     </owl:ObjectProperty>
@@ -466,6 +491,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#EstiloCulinarioPlato -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#EstiloCulinarioPlato">
+        <rdfs:comment>Categoriza plato con su estilo culinario</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#EstiloDeComida -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#EstiloDeComida">
@@ -651,6 +684,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#OrigenPlato -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#OrigenPlato">
+        <rdfs:comment>Relaciona el plato con su pais de origen</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Plato -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Plato">
@@ -663,21 +704,37 @@
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#disponibleEn"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Mes"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#esDeTipoComida"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoComida"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoComidaPlato"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#esFrioOCaliente"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TemperaturaPlato"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TemperaturaPlato"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#disponibleEn"/>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#esOrigenDe"/>
                 <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Mes"/>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#OrigenPlato"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#estiloCulinario"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#EstiloCulinarioPlato"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -797,9 +854,9 @@
     
 
 
-    <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoComida -->
+    <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoComidaPlato -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoComida">
+    <owl:Class rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoComidaPlato">
         <rdfs:comment>Categoriza de que tipo es un plato entre carne, pesacado y vegetariano.</rdfs:comment>
     </owl:Class>
     
@@ -989,7 +1046,7 @@
     <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Carne -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Carne">
-        <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoComida"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoComidaPlato"/>
         <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoIngrediente"/>
     </owl:NamedIndividual>
     
@@ -1039,6 +1096,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Colombia -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Colombia">
+        <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#OrigenPlato"/>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Condimento -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Condimento">
@@ -1066,6 +1131,8 @@
         <ricorico:esCompatibleCon rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#VinoBlanco"/>
         <ricorico:esDeTipoComida rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Vegetariano"/>
         <ricorico:esFrioOCaliente rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Caliente"/>
+        <ricorico:esOrigenDe rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#España"/>
+        <ricorico:estiloCulinario rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Sopa"/>
         <ricorico:tieneEstilo rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Moderno"/>
         <ricorico:tieneIngredientes rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Calabaza"/>
         <ricorico:tieneIngredientes rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Cebolla"/>
@@ -1101,6 +1168,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Ensalada -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Ensalada">
+        <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#EstiloCulinarioPlato"/>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#EnsaladaQuesoCabra -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#EnsaladaQuesoCabra">
@@ -1112,6 +1187,8 @@
         <ricorico:esCompatibleCon rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#VinoBlanco"/>
         <ricorico:esDeTipoComida rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Vegetariano"/>
         <ricorico:esFrioOCaliente rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Frio"/>
+        <ricorico:esOrigenDe rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Francia"/>
+        <ricorico:estiloCulinario rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Ensalada"/>
         <ricorico:tieneEstilo rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Clasico"/>
         <ricorico:tieneIngredientes rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Lechuga"/>
         <ricorico:tieneIngredientes rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#QuesoCabra"/>
@@ -1119,6 +1196,14 @@
         <ricorico:nombre>Ensalada templada de queso de cabra</ricorico:nombre>
         <ricorico:precio rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8.5</ricorico:precio>
         <ricorico:prioridad rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</ricorico:prioridad>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#España -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#España">
+        <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#OrigenPlato"/>
     </owl:NamedIndividual>
     
 
@@ -1157,6 +1242,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Francia -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Francia">
+        <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#OrigenPlato"/>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Frio -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Frio">
@@ -1189,6 +1282,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Helado -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Helado">
+        <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#EstiloCulinarioPlato"/>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#HeladoMango -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#HeladoMango">
@@ -1200,6 +1301,8 @@
         <ricorico:esCompatibleCon rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#ZumoMango"/>
         <ricorico:esDeTipoComida rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Vegetariano"/>
         <ricorico:esFrioOCaliente rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Frio"/>
+        <ricorico:esOrigenDe rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Italia"/>
+        <ricorico:estiloCulinario rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Helado"/>
         <ricorico:tieneEstilo rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Moderno"/>
         <ricorico:tieneIngredientes rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Almendra"/>
         <ricorico:tieneIngredientes rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Mango"/>
@@ -1211,10 +1314,26 @@
     
 
 
+    <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Horneado -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Horneado">
+        <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#EstiloCulinarioPlato"/>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Huevo -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Huevo">
         <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoIngrediente"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Italia -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Italia">
+        <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#OrigenPlato"/>
     </owl:NamedIndividual>
     
 
@@ -1343,6 +1462,8 @@
         <ricorico:esCompatibleCon rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#AguaMineral"/>
         <ricorico:esDeTipoComida rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Pescado"/>
         <ricorico:esFrioOCaliente rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Caliente"/>
+        <ricorico:esOrigenDe rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#España"/>
+        <ricorico:estiloCulinario rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Plancha"/>
         <ricorico:tieneEstilo rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Moderno"/>
         <ricorico:tieneIngredientes rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Ajo"/>
         <ricorico:tieneIngredientes rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Merluza"/>
@@ -1393,6 +1514,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Noviembre">
         <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Mes"/>
+        <ricorico:esOrigenDe rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Italia"/>
     </owl:NamedIndividual>
     
 
@@ -1424,8 +1546,16 @@
     <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Pescado -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Pescado">
-        <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoComida"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoComidaPlato"/>
         <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoIngrediente"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Plancha -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Plancha">
+        <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#EstiloCulinarioPlato"/>
     </owl:NamedIndividual>
     
 
@@ -1529,6 +1659,7 @@
         <ricorico:esCompatibleCon rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#VinoTinto"/>
         <ricorico:esDeTipoComida rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Carne"/>
         <ricorico:esFrioOCaliente rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Caliente"/>
+        <ricorico:estiloCulinario rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Horneado"/>
         <ricorico:tieneEstilo rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Sibarita"/>
         <ricorico:tieneIngredientes rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Mostaza"/>
         <ricorico:tieneIngredientes rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Solomillo"/>
@@ -1536,6 +1667,22 @@
         <ricorico:nombre>Solomillo a la mostaza</ricorico:nombre>
         <ricorico:precio rdf:datatype="http://www.w3.org/2001/XMLSchema#float">14.0</ricorico:precio>
         <ricorico:prioridad rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</ricorico:prioridad>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Sopa -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Sopa">
+        <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#EstiloCulinarioPlato"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Tarta -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Tarta">
+        <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#EstiloCulinarioPlato"/>
     </owl:NamedIndividual>
     
 
@@ -1552,6 +1699,8 @@
         <ricorico:esCompatibleCon rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#ZumoNaranja"/>
         <ricorico:esDeTipoComida rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Vegetariano"/>
         <ricorico:esFrioOCaliente rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Frio"/>
+        <ricorico:esOrigenDe rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#España"/>
+        <ricorico:estiloCulinario rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Tarta"/>
         <ricorico:tieneEstilo rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Moderno"/>
         <ricorico:tieneIngredientes rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Frambuesa"/>
         <ricorico:tieneIngredientes rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#QuesoFresco"/>
@@ -1566,7 +1715,7 @@
     <!-- http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Vegetariano -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Vegetariano">
-        <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoComida"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoComidaPlato"/>
     </owl:NamedIndividual>
     
 
