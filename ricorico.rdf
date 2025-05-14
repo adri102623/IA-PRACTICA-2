@@ -92,6 +92,7 @@
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Plato"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#OrigenPlato"/>
+        <rdfs:comment>Relaciona un plato con su país de origen</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -783,7 +784,8 @@
                 <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>Subclase de Alimento que representa un plato en el men.  Se divide en PrimerPlato, SegundoPlato y Postre. Contiene ingredientes, un estilo culinario, nivel de dificultad, prioridad y disponibilidad estacional.</rdfs:comment>
+        <rdfs:comment>Subclase de Alimento que representa un plato en el menu.  Se divide en PrimerPlato, SegundoPlardfs:comment
+to y Postre. Contiene ingredientes, un estilo culinario, nivel de dificultad, prioridad y disponibilidad estacional.</rdfs:comment>
     </owl:Class>
     
 
