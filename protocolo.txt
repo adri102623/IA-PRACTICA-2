@@ -1,0 +1,11 @@
+PROTOCOLO DE EJECUCIÓN DEL PROGRAMA: *PARA MAS INFO MIRAR ULTIMA PREGUNTA DEL PUNTO EXTRA*
+
+-TipoComida: EJEMPLO: menu vegano español (hacer un get_TipoComida en plato i filtrar por solo los que tengas estas caracteristicas)
+-Ingredienteprohibido:  EJEMPLO: sin Aceite (hacer get_ingredienteProhibido en plato i filtrar por los que no tengan este ingrediente)
+-Estacionalidad: EJEMPLO: El evento es en junio (hacer un get_time en ingredient para eliminar todo ingrediente no disponible en junio, aparte ejecutar is_temperature(mes) i con la estacion que retorne hacer un get_temperature  en plato para primavera/verano=plato frio i viceversa)
+-Presupuesto: EJEMPLO: El menu me debe costar entre 20-30$ ( hacer un get_price_menu en menu que haga un get_price_alimento de cada plato y bebida,los sume y compruebe que el resultado esta en el rango)
+-Tipo de Evento: EJEMPLO: Mi evento es un congreso (añadir platos con estilo culinario moderno)
+-Número de Comensales: EJEMPLO: Mi evento tendra 600 comensales (elegir platos con dificultad baja)
+
+
+RESTRICCION FINAL: QUE LOS PLATOS DEL MENU SEAN COMPATIBLES
