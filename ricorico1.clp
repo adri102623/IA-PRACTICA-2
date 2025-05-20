@@ -33,13 +33,7 @@
         (create-accessor read-write))
 )
 
-(defmessage-handler Bebida get-precio
-  ()
-  (send ?self precio)
-)
-
-(defclass Plato "Subclase de Alimento que representa un plato en el menu.  Se divide en PrimerPlato, SegundoPlardfs:comment
-to y Postre. Contiene ingredientes, un estilo culinario, nivel de dificultad, prioridad y disponibilidad estacional."
+(defclass Plato "Subclase de Alimento que representa un plato en el menu.  Se divide en PrimerPlato, SegundoPlardfs:comment to y Postre. Contiene ingredientes, un estilo culinario, nivel de dificultad, prioridad y disponibilidad estacional."
     (is-a Alimento)
     (role concrete)
     (pattern-match reactive)
@@ -139,7 +133,7 @@ to y Postre. Contiene ingredientes, un estilo culinario, nivel de dificultad, pr
     (is-a USER)
     (role concrete)
     (pattern-match reactive)
-    (multislot tieneBebida
+    (slot tieneBebida
         (type INSTANCE)
         (create-accessor read-write))
     ;;; Asocia un Postre a un Menú.
@@ -177,14 +171,22 @@ to y Postre. Contiene ingredientes, un estilo culinario, nivel de dificultad, pr
     ;;; Representan las restricciones que el Usuario impone sobre el menú deseado.
     (multislot prohibeIngrediente
         (type INSTANCE)
+        (allowed-classes Ingrediente)
         (create-accessor read-write))
     ;;; Representan las restricciones que el Usuario impone sobre el menú deseado.
     (multislot prohibeTipoBebida
         (type INSTANCE)
+        (allowed-classes TipoBebida)
         (create-accessor read-write))
     ;;; Representan las restricciones que el Usuario impone sobre el menú deseado.
     (multislot prohibeTipoComida
         (type INSTANCE)
+        (allowed-classes TipoComidaPlato)
+        (create-accessor read-write))
+    ;;; Tipos de comida preferidos por el usuario.
+    (multislot esDeTipoComida
+        (type INSTANCE)
+        (allowed-classes TipoComidaPlato)
         (create-accessor read-write))
     ;;; Precio máximo que un usuario está dispuesto a pagar por el menú completo.
     (slot condicionPrecioMax
@@ -552,7 +554,7 @@ to y Postre. Contiene ingredientes, un estilo culinario, nivel de dificultad, pr
     (precio 8.0)           ; precio total del plato
     (dificultad 2)         ; baja dificultad (1-5)
     (tieneIngredientes [Lechuga] [Pollo] [QuesoParmesano] [Crutones] [SalsaCesar])
-    (esDeTipoComida [Clasico] [Frio] [Vegetariano]) ; Vegetariano si omites el pollo
+    (esDeTipoComida [Clasico] [Frio]) 
     (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]) ; todo el año
     (esAdecuadoParaEvento [Familiar] [Congreso])
     (esCompatibleCon [VinoBlanco] [SolomilloCerdo] [TartaQueso])
@@ -562,9 +564,9 @@ to y Postre. Contiene ingredientes, un estilo culinario, nivel de dificultad, pr
 ([SolomilloCerdo] of SegundoPlato
     (nombre "Solomillo de Cerdo con Salsa de Vino")
     (precio 12.0)          ; precio total del plato
-    (dificultad 3)         ; dificultad media (1-5)
+    (dificultad 2)         ; dificultad media (1-5)
     (tieneIngredientes [Cerdo] [VinoTinto] [Ajo] [Patata] [AceiteOliva])
-    (esDeTipoComida [Clasico] [Caliente])
+    (esDeTipoComida [Clasico] [Caliente] [Moderno])
     (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]) ; todo el año
     (esAdecuadoParaEvento [Familiar] [Congreso])
     (esCompatibleCon [VinoBlanco] [EnsaladaCesar] [TartaQueso])
@@ -574,7 +576,7 @@ to y Postre. Contiene ingredientes, un estilo culinario, nivel de dificultad, pr
 ([TartaQueso] of Postre
     (nombre "Tarta de Queso con Frutos Rojos")
     (precio 6.0)           ; precio total del plato
-    (dificultad 3)         ; dificultad media (1-5)
+    (dificultad 2)         ; dificultad media (1-5)
     (tieneIngredientes [QuesoCrema] [Azucar] [Huevo] [FrutosRojos] [Galleta])
     (esDeTipoComida [Clasico] [Frio])
     (disponibleEn [Mayo] [Junio] [Julio]) ; limitado por frutos rojos
@@ -582,6 +584,4 @@ to y Postre. Contiene ingredientes, un estilo culinario, nivel de dificultad, pr
     (esCompatibleCon [VinoBlanco] [EnsaladaCesar] [SolomilloCerdo])
 )
 )
-
-
 

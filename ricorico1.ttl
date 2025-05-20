@@ -1,0 +1,630 @@
+@prefix : <http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ricorico: <http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#> .
+@base <http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico/> .
+
+<http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico> rdf:type owl:Ontology ;
+                                                                 rdfs:comment "Esta ontología modela un sistema de generación automática de menús personalizados para la empresa de catering \"Rico Rico\", teniendo en cuenta caraterísticas del evento, restricciones del usuario, y propiedades culinarias de los platos, bebidas e ingredientes. Está disenada para facilitar la selección de menús adaptados a preferencias, presupuestos y disponibilidad estacional." .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#disponibleEn
+ricorico:disponibleEn rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf owl:topObjectProperty ;
+                      rdfs:domain ricorico:Plato ;
+                      rdfs:range ricorico:Mes ;
+                      rdfs:comment "Relaciona un ingrediente o un plato con los meses del año en los que est disponible o puede ser preparado. Permite gestionar la estacionalidad de los alimentos y la generación de menús." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#esAdecuadoParaEvento
+ricorico:esAdecuadoParaEvento rdf:type owl:ObjectProperty ;
+                              rdfs:subPropertyOf owl:topObjectProperty ;
+                              rdfs:domain ricorico:Plato ;
+                              rdfs:range ricorico:TipoEvento ;
+                              rdfs:comment "Restriccion para saber si un plato es adeucado para un evento" .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#esCompatibleCon
+ricorico:esCompatibleCon rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf owl:topObjectProperty ;
+                         rdf:type owl:SymmetricProperty ;
+                         rdfs:domain ricorico:Alimento ;
+                         rdfs:range ricorico:Alimento ;
+                         rdfs:comment "Relación simétrica que indica si un Alimento es compatible con otro en un menú." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#esDeTipoComida
+ricorico:esDeTipoComida rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf owl:topObjectProperty ;
+                        rdfs:domain ricorico:Plato ;
+                        rdfs:range ricorico:TipoComidaPlato ;
+                        rdfs:comment "Indica a qu tipo de comida pertenee un plato, como por ejemplo si es de carne, pescado, vegetariano... Es útil para aplicar restricciones alimentarias y las clasificaciones culinarias en la elaboración de menús." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#organizaEvento
+ricorico:organizaEvento rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf owl:topObjectProperty ;
+                        rdfs:domain ricorico:Usuario ;
+                        rdfs:range ricorico:Evento ;
+                        rdfs:comment "Relación entre un Usuario y el Evento que organiza." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#prohibeIngrediente
+ricorico:prohibeIngrediente rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf owl:topObjectProperty ;
+                            rdfs:domain ricorico:Restriccion ;
+                            rdfs:range ricorico:Ingrediente ;
+                            rdfs:comment "Representan las restricciones que el Usuario impone sobre el menú deseado." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#prohibeTipoBebida
+ricorico:prohibeTipoBebida rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf owl:topObjectProperty ;
+                           rdfs:domain ricorico:Restriccion ;
+                           rdfs:range ricorico:TipoBebida ;
+                           rdfs:comment "Representan las restricciones que el Usuario impone sobre el menú deseado." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#prohibeTipoComida
+ricorico:prohibeTipoComida rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf owl:topObjectProperty ;
+                           rdfs:domain ricorico:Restriccion ;
+                           rdfs:range ricorico:TipoComidaPlato ;
+                           rdfs:comment "Representan las restricciones que el Usuario impone sobre el menú deseado." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#tieneBebida
+ricorico:tieneBebida rdf:type owl:ObjectProperty ,
+                             owl:FunctionalProperty ;
+                     rdfs:subPropertyOf owl:topObjectProperty ;
+                     rdfs:domain ricorico:Menu ;
+                     rdfs:range ricorico:Bebida .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#tieneIngredientes
+ricorico:tieneIngredientes rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf owl:topObjectProperty ;
+                           rdfs:domain ricorico:Plato ;
+                           rdfs:range ricorico:Ingrediente ;
+                           rdfs:comment "Relación entre un Plato y los Ingredientes que lo componen." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#tieneMes
+ricorico:tieneMes rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf owl:topObjectProperty ;
+                  rdf:type owl:FunctionalProperty ;
+                  rdfs:domain ricorico:Evento ;
+                  rdfs:range ricorico:Mes ;
+                  rdfs:comment "Indica en qué mes se celebrará un evento. Es relevante para determinar la disponibilidad estacional de los ingredientes y platos en funciñn de la fecha del evento." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#tienePostre
+ricorico:tienePostre rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf owl:topObjectProperty ;
+                     rdf:type owl:FunctionalProperty ;
+                     rdfs:domain ricorico:Menu ;
+                     rdfs:range ricorico:Postre ;
+                     rdfs:comment "Asocia un Postre a un Menú." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#tienePrimerPlato
+ricorico:tienePrimerPlato rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf owl:topObjectProperty ;
+                          rdf:type owl:FunctionalProperty ;
+                          rdfs:domain ricorico:Menu ;
+                          rdfs:range ricorico:PrimerPlato ;
+                          rdfs:comment "Asocia un PrimerPlato a un Menú." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#tieneRestriccion
+ricorico:tieneRestriccion rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf owl:topObjectProperty ;
+                          rdfs:domain ricorico:Usuario ;
+                          rdfs:range ricorico:Restriccion ;
+                          rdfs:comment "Relación entre un Usuario y las Restricciones que ha definido." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#tieneSegundoPlato
+ricorico:tieneSegundoPlato rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf owl:topObjectProperty ;
+                           rdf:type owl:FunctionalProperty ;
+                           rdfs:domain ricorico:Menu ;
+                           rdfs:range ricorico:SegundoPlato ;
+                           rdfs:comment "Asocia un SegundoPlato a un Menú." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#tieneTipoBebida
+ricorico:tieneTipoBebida rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf owl:topObjectProperty ;
+                         rdfs:domain ricorico:Bebida ;
+                         rdfs:range ricorico:TipoBebida ;
+                         rdfs:comment "Relación entre una Bebida y su clasificación en TipoBebida." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#tieneTipoEvento
+ricorico:tieneTipoEvento rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf owl:topObjectProperty ;
+                         rdfs:domain ricorico:Evento ;
+                         rdfs:range ricorico:TipoEvento ;
+                         rdfs:comment "Relación entre un Evento y su tipo (Familiar o Congreso)." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#tieneTipoIngrediente
+ricorico:tieneTipoIngrediente rdf:type owl:ObjectProperty ;
+                              rdfs:subPropertyOf owl:topObjectProperty ;
+                              rdfs:domain ricorico:Ingrediente ;
+                              rdfs:range ricorico:TipoIngrediente ;
+                              rdfs:comment "Relación entre un Ingrediente y su clasificación en TipoIngrediente." .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#calorias
+ricorico:calorias rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdf:type owl:FunctionalProperty ;
+                  rdfs:domain ricorico:Ingrediente ;
+                  rdfs:range xsd:integer ;
+                  rdfs:comment "Cantidad de energía que aporta un ingrediente, expresada en kilocalorías (kcal)." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#carbohidratos
+ricorico:carbohidratos rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf owl:topDataProperty ;
+                       rdf:type owl:FunctionalProperty ;
+                       rdfs:domain ricorico:Ingrediente ;
+                       rdfs:range xsd:integer ;
+                       rdfs:comment "Gramos de carbohidratos presentes en un ingrediente o alimento." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#colesterol
+ricorico:colesterol rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf owl:topDataProperty ;
+                    rdf:type owl:FunctionalProperty ;
+                    rdfs:domain ricorico:Ingrediente ;
+                    rdfs:range xsd:integer ;
+                    rdfs:comment "Miligramos de colesterol contenidos en un ingrediente." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#condicionPrecioMax
+ricorico:condicionPrecioMax rdf:type owl:DatatypeProperty ;
+                            rdfs:subPropertyOf owl:topDataProperty ;
+                            rdf:type owl:FunctionalProperty ;
+                            rdfs:domain ricorico:Restriccion ;
+                            rdfs:range xsd:float ;
+                            rdfs:comment "Precio máximo que un usuario está dispuesto a pagar por el menú completo." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#condicionPrecioMin
+ricorico:condicionPrecioMin rdf:type owl:DatatypeProperty ;
+                            rdfs:subPropertyOf owl:topDataProperty ;
+                            rdf:type owl:FunctionalProperty ;
+                            rdfs:domain ricorico:Restriccion ;
+                            rdfs:range xsd:float ;
+                            rdfs:comment "Precio mínimo que un usuario espera gastar en el menú completo." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#dificultad
+ricorico:dificultad rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf owl:topDataProperty ;
+                    rdf:type owl:FunctionalProperty ;
+                    rdfs:domain ricorico:Plato ;
+                    rdfs:range xsd:integer ;
+                    rdfs:comment "Nivel de complejidad en la preparación de un plato, expresado numéricamente." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#grasas
+ricorico:grasas rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdf:type owl:FunctionalProperty ;
+                rdfs:domain ricorico:Ingrediente ;
+                rdfs:range xsd:integer ;
+                rdfs:comment "Gramos de grasas totales presentes en un ingrediente." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#nombre
+ricorico:nombre rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdf:type owl:FunctionalProperty ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( ricorico:Alimento
+                                            ricorico:Ingrediente
+                                          )
+                            ] ;
+                rdfs:range xsd:string ;
+                rdfs:comment "Nombre identificativo del alimento o ingrediente." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#numeroComensales
+ricorico:numeroComensales rdf:type owl:DatatypeProperty ;
+                          rdfs:subPropertyOf owl:topDataProperty ;
+                          rdf:type owl:FunctionalProperty ;
+                          rdfs:domain ricorico:Evento ;
+                          rdfs:range xsd:integer ;
+                          rdfs:comment "Número total de personas que asistirán al evento." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#precio
+ricorico:precio rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdf:type owl:FunctionalProperty ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( ricorico:Alimento
+                                            ricorico:Menu
+                                          )
+                            ] ;
+                rdfs:range xsd:float ;
+                rdfs:comment "Precio individual de un plato, bebida o ingrediente." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#proteinas
+ricorico:proteinas rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdf:type owl:FunctionalProperty ;
+                   rdfs:domain ricorico:Ingrediente ;
+                   rdfs:range xsd:integer ;
+                   rdfs:comment "Gramos de proteínas contenidos en un ingrediente." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#puntuacion
+ricorico:puntuacion rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf owl:topDataProperty ;
+                    rdf:type owl:FunctionalProperty ;
+                    rdfs:domain ricorico:Menu ;
+                    rdfs:range xsd:float ;
+                    rdfs:comment "Evaluación de calidad o adecuación del menú final, expresada como puntuación numérica." .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Alimento
+ricorico:Alimento rdf:type owl:Class ;
+                  rdfs:comment "Clase abstracta que representa cualquier alimento comestible dentro de un men. Tiene como subclases Plato y Bebida." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Bebida
+ricorico:Bebida rdf:type owl:Class ;
+                rdfs:subClassOf ricorico:Alimento ;
+                owl:disjointWith ricorico:Plato ;
+                rdfs:comment "Subclase de Alimento que representa una bebida. Se le awsocia un tipo (TipoBebida) y puede ser compatible con ciertos platos." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Evento
+ricorico:Evento rdf:type owl:Class ;
+                rdfs:comment "Describe las características del evento para el cual se genera el menú: tipo (TipoEvento), mes de celebración y número de comensales." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Ingrediente
+ricorico:Ingrediente rdf:type owl:Class ;
+                     rdfs:comment "Representa un ingrediente utilizado en los platos. Tiene propiedades nutricionales y estacionales. Cada ingrediente pertenece a un TipoIngrediente." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Menu
+ricorico:Menu rdf:type owl:Class ;
+              rdfs:comment "Representa un conjunto de platos y bebidas seleccionados para un evento. Tiene un precio total, una puntuación de calidad y referencias a los platos que lo componen." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Mes
+ricorico:Mes rdf:type owl:Class ;
+             rdfs:comment "Contiene todos los meses del año." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Plato
+ricorico:Plato rdf:type owl:Class ;
+               rdfs:subClassOf ricorico:Alimento ;
+               rdfs:comment """Subclase de Alimento que representa un plato en el menu.  Se divide en PrimerPlato, SegundoPlardfs:comment
+to y Postre. Contiene ingredientes, un estilo culinario, nivel de dificultad, prioridad y disponibilidad estacional.""" .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Postre
+ricorico:Postre rdf:type owl:Class ;
+                rdfs:subClassOf ricorico:Plato ;
+                owl:disjointWith ricorico:PrimerPlato ,
+                                 ricorico:SegundoPlato .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#PrimerPlato
+ricorico:PrimerPlato rdf:type owl:Class ;
+                     rdfs:subClassOf ricorico:Plato .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Restriccion
+ricorico:Restriccion rdf:type owl:Class ;
+                     rdfs:comment "Contiene las condiciones y preferencias impuestas por el usuario, como precio máximo, ingredientes prohibidos o estilos de comida requeridos." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#SegundoPlato
+ricorico:SegundoPlato rdf:type owl:Class ;
+                      rdfs:subClassOf ricorico:Plato .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoBebida
+ricorico:TipoBebida rdf:type owl:Class ;
+                    rdfs:comment "Define el tipo o clasificación de una bebida (Alcohol, Zumo, Cafeína, etc.)." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoComidaPlato
+ricorico:TipoComidaPlato rdf:type owl:Class ;
+                         rdfs:comment "Categoriza de que tipo es un plato entre carne, pesacado y vegetariano." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoEvento
+ricorico:TipoEvento rdf:type owl:Class ;
+                    rdfs:comment "Categoriza los eventos posibles, como Familiar o Congreso." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#TipoIngrediente
+ricorico:TipoIngrediente rdf:type owl:Class ;
+                         rdfs:comment "Representa una clasificación general de los ingredientes como Carne, Verdura, Cereal, etc." .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Usuario
+ricorico:Usuario rdf:type owl:Class ;
+                 rdfs:comment "Representa al cliente que organiza un evento y define restricciones sobre el menú." .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Abril
+ricorico:Abril rdf:type owl:NamedIndividual ,
+                        ricorico:Mes .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Agosto
+ricorico:Agosto rdf:type owl:NamedIndividual ,
+                         ricorico:Mes .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Agua
+ricorico:Agua rdf:type owl:NamedIndividual ,
+                       ricorico:TipoBebida .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Alcohol
+ricorico:Alcohol rdf:type owl:NamedIndividual ,
+                          ricorico:TipoBebida .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Aromatizante
+ricorico:Aromatizante rdf:type owl:NamedIndividual ,
+                               ricorico:TipoIngrediente .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Cafeina
+ricorico:Cafeina rdf:type owl:NamedIndividual ,
+                          ricorico:TipoBebida .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Caliente
+ricorico:Caliente rdf:type owl:NamedIndividual ,
+                           ricorico:TipoComidaPlato .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Carne
+ricorico:Carne rdf:type owl:NamedIndividual ,
+                        ricorico:TipoIngrediente .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Cereal
+ricorico:Cereal rdf:type owl:NamedIndividual ,
+                         ricorico:TipoIngrediente .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Cerveza
+ricorico:Cerveza rdf:type owl:NamedIndividual ,
+                          ricorico:TipoBebida .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Clasico
+ricorico:Clasico rdf:type owl:NamedIndividual ,
+                          ricorico:TipoComidaPlato .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Condimento
+ricorico:Condimento rdf:type owl:NamedIndividual ,
+                             ricorico:TipoIngrediente .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Congreso
+ricorico:Congreso rdf:type owl:NamedIndividual ,
+                           ricorico:TipoEvento .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Diciembre
+ricorico:Diciembre rdf:type owl:NamedIndividual ,
+                            ricorico:Mes .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Endulzante
+ricorico:Endulzante rdf:type owl:NamedIndividual ,
+                             ricorico:TipoIngrediente .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Enero
+ricorico:Enero rdf:type owl:NamedIndividual ,
+                        ricorico:Mes .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Español
+ricorico:Español rdf:type owl:NamedIndividual ,
+                          ricorico:TipoComidaPlato .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Familiar
+ricorico:Familiar rdf:type owl:NamedIndividual ,
+                           ricorico:TipoEvento .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Febrero
+ricorico:Febrero rdf:type owl:NamedIndividual ,
+                          ricorico:Mes .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Frio
+ricorico:Frio rdf:type owl:NamedIndividual ,
+                       ricorico:TipoComidaPlato .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Fruta
+ricorico:Fruta rdf:type owl:NamedIndividual ,
+                        ricorico:TipoIngrediente .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#FrutoSeco
+ricorico:FrutoSeco rdf:type owl:NamedIndividual ,
+                            ricorico:TipoIngrediente .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#GlutenFree
+ricorico:GlutenFree rdf:type owl:NamedIndividual ,
+                             ricorico:TipoComidaPlato .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Grasa
+ricorico:Grasa rdf:type owl:NamedIndividual ,
+                        ricorico:TipoIngrediente .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Huevo
+ricorico:Huevo rdf:type owl:NamedIndividual ,
+                        ricorico:TipoIngrediente .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Internacional
+ricorico:Internacional rdf:type owl:NamedIndividual ,
+                                ricorico:TipoComidaPlato .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Italiano
+ricorico:Italiano rdf:type owl:NamedIndividual ,
+                           ricorico:TipoComidaPlato .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Japonés
+ricorico:Japonés rdf:type owl:NamedIndividual ,
+                          ricorico:TipoComidaPlato .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Julio
+ricorico:Julio rdf:type owl:NamedIndividual ,
+                        ricorico:Mes .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Junio
+ricorico:Junio rdf:type owl:NamedIndividual ,
+                        ricorico:Mes .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Lacteo
+ricorico:Lacteo rdf:type owl:NamedIndividual ,
+                         ricorico:TipoIngrediente .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#LactoseFree
+ricorico:LactoseFree rdf:type owl:NamedIndividual ,
+                              ricorico:TipoComidaPlato .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Legumbre
+ricorico:Legumbre rdf:type owl:NamedIndividual ,
+                           ricorico:TipoIngrediente .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Light
+ricorico:Light rdf:type owl:NamedIndividual ,
+                        ricorico:TipoBebida .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Marisco
+ricorico:Marisco rdf:type owl:NamedIndividual ,
+                          ricorico:TipoIngrediente .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Marzo
+ricorico:Marzo rdf:type owl:NamedIndividual ,
+                        ricorico:Mes .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Mayo
+ricorico:Mayo rdf:type owl:NamedIndividual ,
+                       ricorico:Mes .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Moderno
+ricorico:Moderno rdf:type owl:NamedIndividual ,
+                          ricorico:TipoComidaPlato .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Noviembre
+ricorico:Noviembre rdf:type owl:NamedIndividual ,
+                            ricorico:Mes .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Octubre
+ricorico:Octubre rdf:type owl:NamedIndividual ,
+                          ricorico:Mes .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Pan
+ricorico:Pan rdf:type owl:NamedIndividual ,
+                      ricorico:TipoIngrediente .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Pasta
+ricorico:Pasta rdf:type owl:NamedIndividual ,
+                        ricorico:TipoIngrediente .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Pescado
+ricorico:Pescado rdf:type owl:NamedIndividual ,
+                          ricorico:TipoIngrediente .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Salsa
+ricorico:Salsa rdf:type owl:NamedIndividual ,
+                        ricorico:TipoIngrediente .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Septiembre
+ricorico:Septiembre rdf:type owl:NamedIndividual ,
+                             ricorico:Mes .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Sopa
+ricorico:Sopa rdf:type owl:NamedIndividual ,
+                       ricorico:TipoComidaPlato .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Vegano
+ricorico:Vegano rdf:type owl:NamedIndividual ,
+                         ricorico:TipoComidaPlato .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Vegetariano
+ricorico:Vegetariano rdf:type owl:NamedIndividual ,
+                              ricorico:TipoComidaPlato .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Verdura
+ricorico:Verdura rdf:type owl:NamedIndividual ,
+                          ricorico:TipoIngrediente .
+
+
+###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#Zumo
+ricorico:Zumo rdf:type owl:NamedIndividual ,
+                       ricorico:TipoBebida .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
