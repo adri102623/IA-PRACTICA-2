@@ -105,11 +105,14 @@
     (declare (salience -2))
     (object (is-a Restriccion)
             (condicionPrecioMin ?min)
-            (condicionPrecioMax ?max))
+            (condicionPrecioMax ?max)
+            (bebidaParaCadaPlato ?bebida-por-plato&:(eq ?bebida-por-plato FALSE)))
     ?p1 <- (object (is-a PrimerPlato)
+                    (nombre ?n1)
                     (esIncompatibleCon $?comp1)
                     (precio ?precio1))
     ?p2 <- (object (is-a SegundoPlato)
+                    (nombre ?n2)
                     (esIncompatibleCon $?comp2)
                     (precio ?precio2))
     ?p3 <- (object (is-a Postre)
@@ -118,6 +121,7 @@
     ?b <- (object (is-a Bebida)
                   (esIncompatibleCon $?compb)
                   (precio ?preciob))
+    (test (not (eq ?n1 ?n2)))
     (test (not (member$ ?p2 ?comp1)))
     (test (not (member$ ?p3 ?comp1)))
     (test (not (member$ ?b ?comp1)))
@@ -141,65 +145,56 @@
                     (tieneBebida (create$ ?b))
                     (precio (get-price (create$ ?precio1 ?precio2 ?precio3 ?preciob)))
                     (puntuacion 0.9))))
+    
     ;(printout t "Menú generado: " (send ?p1 get-nombre) ", " (send ?p2 get-nombre) ", " (send ?p3 get-nombre) ", " (send ?b get-nombre) ", Precio: " (send ?menu get-precio) crlf))
 
-; (defrule generar-menu-con-varias-bebidas "Genera un menú con una bebida por plato"
-;     (object (is-a Restriccion)
-;             (condicionPrecioMin ?min)
-;             (condicionPrecioMax ?max))
-;     ?p1 <- (object (is-a PrimerPlato)
-;                     (esIncompatibleCon $?comp1)
-;                     (precio ?precio1))
-;     ?p2 <- (object (is-a SegundoPlato)
-;                     (esIncompatibleCon $?comp2)
-;                     (precio ?precio2))
-;     ?p3 <- (object (is-a Postre)
-;                     (esIncompatibleCon $?comp3)
-;                     (precio ?precio3))
-;     ?b1 <- (object (is-a Bebida)
-;                   (esIncompatibleCon $?compb)
-;                   (precio ?preciob))
-;     ?b1 <- (object (is-a Bebida)
-;                   (esIncompatibleCon $?compb)
-;                   (precio ?preciob))
-;     ?b1 <- (object (is-a Bebida)
-;                   (esIncompatibleCon $?compb)
-;                   (precio ?preciob))
-;     ; Variables:
-;     ; p1 = Primero
-;     ; p2 = Segundo
-;     ; p3 = Postre
-;     ; b = Bebida
-;     ; comp1 = platos compatibles de p1
-;     ; comp2 = platos compatibles de p2
-;     ; comp3 = platos compatibles de p3
-;     ; compb = platos compatibles de b
-;     ; precio1
-;     ; precio2
-;     ; precio3
-;     ; preciob
-    
-;     (test (not (member$ ?p2 ?comp1)))
-;     (test (not (member$ ?p3 ?comp1)));;; Regla para generar menús compatibles
-;     (test (not (member$ ?b ?comp1)))
-;     (test (not (member$ ?p1 ?comp2)))
-;     (test (not (member$ ?p3 ?comp2)))
-;     (test (not (member$ ?b ?comp2)))
-;     (test (not (member$ ?p1 ?comp3)))
-;     (test (not (member$ ?p2 ?comp3)))
-;     (test (not (member$ ?b ?comp3)))
-;     (test (not (member$ ?p1 ?compb)))
-;     (test (not (member$ ?p2 ?compb)))
-;     (test (not (member$ ?p3 ?compb)))
-;     (test (and
-;         (>= (get-price(create$ precio1 precio2 precio3 preciob)) ?min)
-;         (<= (get-price(create$ precio1 precio2 precio3 preciob)) ?max)))
-;     =>
-;     (bind ?menu (make-instance of Menu
-;                     (tienePrimerPlato ?p1)
-;                     (tieneSegundoPlato ?p2)
-;                     (tienePostre ?p3)
-;                     (tieneBebida (create$ ?b))
-;                     (precio (get-price (create$ precio1 precio2 precio3 preciob)))
-;                     (puntuacion 0.9)))
-;     (printout t "Menú generado: " (send ?p1 get-nombre) ", " (send ?p2 get-nombre) ", " (send ?p3 get-nombre) ", " (send ?b get-nombre) ", Precio: " (send ?menu get-precio) crlf))
+(defrule generar-menu-con-varias-bebidas "Genera un menú con una bebida por plato"
+    (object (is-a Restriccion)
+            (condicionPrecioMin ?min)
+            (condicionPrecioMax ?max)
+            (bebidaParaCadaPlato ?bebida-por-plato&:(eq ?bebida-por-plato TRUE)))
+    ?p1 <- (object (is-a PrimerPlato)
+                    (nombre ?n1)
+                    (esIncompatibleCon $?comp1)
+                    (precio ?precio1))
+    ?p2 <- (object (is-a SegundoPlato)
+                    (nombre ?n2)
+                    (esIncompatibleCon $?comp2)
+                    (precio ?precio2))
+    ?p3 <- (object (is-a Postre)
+                    (esIncompatibleCon $?comp3)
+                    (precio ?precio3))
+    ?b1 <- (object (is-a Bebida)
+                  (esIncompatibleCon $?compb)
+                  (precio ?preciob))
+    ?b2 <- (object (is-a Bebida)
+                  (esIncompatibleCon $?compb)
+                  (precio ?preciob))
+    ?b3 <- (object (is-a Bebida)
+                  (esIncompatibleCon $?compb)
+                  (precio ?preciob))
+    (test (not (eq ?n1 ?n2)))
+    (test (not (member$ ?p2 ?comp1)))
+    (test (not (member$ ?p3 ?comp1)));;; Regla para generar menús compatibles
+    (test (not (member$ ?b ?comp1)))
+    (test (not (member$ ?p1 ?comp2)))
+    (test (not (member$ ?p3 ?comp2)))
+    (test (not (member$ ?b ?comp2)))
+    (test (not (member$ ?p1 ?comp3)))
+    (test (not (member$ ?p2 ?comp3)))
+    (test (not (member$ ?b ?comp3)))
+    (test (not (member$ ?p1 ?compb)))
+    (test (not (member$ ?p2 ?compb)))
+    (test (not (member$ ?p3 ?compb)))
+    (test (and
+        (>= (get-price(create$ precio1 precio2 precio3 preciob)) ?min)
+        (<= (get-price(create$ precio1 precio2 precio3 preciob)) ?max)))
+    =>
+    (bind ?menu (make-instance of Menu
+                    (tienePrimerPlato ?p1)
+                    (tieneSegundoPlato ?p2)
+                    (tienePostre ?p3)
+                    (tieneBebida (create$ ?b))
+                    (precio (get-price (create$ precio1 precio2 precio3 preciob)))
+                    (puntuacion 0.9)))
+    (printout t "Menú generado: " (send ?p1 get-nombre) ", " (send ?p2 get-nombre) ", " (send ?p3 get-nombre) ", " (send ?b get-nombre) ", Precio: " (send ?menu get-precio) crlf))

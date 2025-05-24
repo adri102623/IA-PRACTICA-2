@@ -86,19 +86,8 @@
 
 (deffunction elemento-en-lista (?element ?collection)
   (foreach ?ingrediente ?collection
-      (printout t ?element " = " (str-cat ?ingrediente) crlf)
       (if (eq ?element (str-cat ?ingrediente)) then
-          (printout t "Encontrado" crlf)
           (return TRUE)))
-  
-  ; (loop-for-count (?i 1 (length$ ?collection)) do
-  ;   (printout t "Evaluando elemento " ?element " en lista " ?collection crlf)
-  ;   (if (eq [?element] (nth$ ?i ?collection))
-  ;   then
-  ;     (return TRUE)
-  ;     (printout t "Elemento " [?element] "Encontrado" crlf))
-  ; )
-  ; FALSE
 )
 
 (deffunction get-TipoComida (?pregunta)
@@ -163,15 +152,22 @@
     (create$ ?min ?max)
 )
 
-; (deffunction get-bebidaPorPlato ()
-;     (printout t "| > " crlf "| ")
-;     (bind ?answer (read))
-;     (while (not (member$ ?answer $?allowed-values)) do
-;       (printout t "| > " ?question crlf "| ")
-;       (bind ?answer (read))
-;     )
-;     ?answer
-; )
+(deffunction get-bebidaPorPlato ()
+    (printout t "| > Elija una de las siguientes opciones marcando el número de la opción (Ejemplo: 1):" crlf)
+    (printout t "1- Una bebida para cada plato" crlf)
+    (printout t "2- Una bebida general para todo el menú" crlf)
+    (printout t crlf "| ")
+    (bind ?answer (read))
+    (bind $?allowed-values (create$ 1 2))
+    (while (not (member$ ?answer $?allowed-values)) do
+      (printout t "| > Elija una de las siguientes opciones marcando el número de la opción (Ejemplo: 1):" crlf)
+      (printout t "1- Una bebida para cada plato" crlf)
+      (printout t "2- Una bebida general para todo el menú" crlf)
+      (printout t "| ")
+      (bind ?answer (read))
+    )
+    ?answer
+)
 
 (deffunction get-price (?precios)
    (bind ?total 0)
@@ -196,11 +192,11 @@
     (bind ?tipos-bebidas-prohibidas (get-TipoBebidaProhibido "¿Qué tipos de bebida deseas prohibir? (e.g., Alcohol, Zumo)"))
     (if (neq ?tipos-bebidas-prohibidas (create$ "ninguno")) then
         (send [RestriccionesUsuario] put-prohibeTipoBebida ?tipos-bebidas-prohibidas))
-    ;(bind ?bebida-por-plato (get-bebidaPorPlato))
-    ;(if (eq ?bebida-por-plato 1) then
-    ;    (send [RestriccionesUsuario] put-bebidaParaCadaPlato TRUE)
-    ;else
-    ;    (send [RestriccionesUsuario] put-bebidaParaCadaPlato FALSE))
+    (bind ?bebida-por-plato (get-bebidaPorPlato))
+    (if (eq ?bebida-por-plato 1) then
+       (send [RestriccionesUsuario] put-bebidaParaCadaPlato TRUE)
+    else
+       (send [RestriccionesUsuario] put-bebidaParaCadaPlato FALSE))
     (send [EventoUsuario] put-tieneMes ?mes)
     (bind ?tipo-evento (get-TipoEvento "¿Qué tipo de evento es? (e.g., Familiar, Congreso)"))
     (send [EventoUsuario] put-tieneTipoEvento ?tipo-evento)

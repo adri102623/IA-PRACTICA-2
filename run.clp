@@ -6,9 +6,3 @@
 ninguno
 ninguno
 ninguno
-[Junio]
-ninguno
-[Congreso]
-200
-10
-40
