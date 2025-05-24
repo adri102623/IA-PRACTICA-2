@@ -6,3 +6,10 @@
 ninguno
 ninguno
 ninguno
+[Junio]
+ninguno
+1
+[Congreso]
+200
+10
+100

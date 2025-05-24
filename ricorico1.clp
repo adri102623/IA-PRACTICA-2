@@ -112,7 +112,7 @@
     (is-a USER)
     (role concrete)
     (pattern-match reactive)
-    (slot tieneBebida
+    (multislot tieneBebida
         (type INSTANCE)
         (create-accessor read-write))
     ;;; Asocia un Postre a un Menú.
