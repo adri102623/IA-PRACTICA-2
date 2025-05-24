@@ -6,8 +6,8 @@
 ninguno
 ninguno
 ninguno
+[Junio]
 ninguno
-[Mayo]
 [Congreso]
 200
 10

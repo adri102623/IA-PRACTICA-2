@@ -58,6 +58,8 @@
   $?answer
 )
 
+
+
 (deffunction is-num (?num)
   (bind ?ret (or (eq (type ?num) INTEGER) (eq (type ?num) FLOAT)))
   ?ret
@@ -80,6 +82,23 @@
     )
   )
   FALSE
+)
+
+(deffunction elemento-en-lista (?element ?collection)
+  (foreach ?ingrediente ?collection
+      (printout t ?element " = " (str-cat ?ingrediente) crlf)
+      (if (eq ?element (str-cat ?ingrediente)) then
+          (printout t "Encontrado" crlf)
+          (return TRUE)))
+  
+  ; (loop-for-count (?i 1 (length$ ?collection)) do
+  ;   (printout t "Evaluando elemento " ?element " en lista " ?collection crlf)
+  ;   (if (eq [?element] (nth$ ?i ?collection))
+  ;   then
+  ;     (return TRUE)
+  ;     (printout t "Elemento " [?element] "Encontrado" crlf))
+  ; )
+  ; FALSE
 )
 
 (deffunction get-TipoComida (?pregunta)
@@ -144,48 +163,21 @@
     (create$ ?min ?max)
 )
 
+; (deffunction get-bebidaPorPlato ()
+;     (printout t "| > " crlf "| ")
+;     (bind ?answer (read))
+;     (while (not (member$ ?answer $?allowed-values)) do
+;       (printout t "| > " ?question crlf "| ")
+;       (bind ?answer (read))
+;     )
+;     ?answer
+; )
+
 (deffunction get-price (?precios)
    (bind ?total 0)
    (foreach ?precio ?precios
       (bind ?total (+ ?total ?precio)))
    ?total)
-
-; (deffunction get-price-menu (?menu)
-;     (bind ?precio 0)
-;     (bind ?primer-plato (send ?menu get-tienePrimerPlato))
-;     (bind ?segundo-plato (send ?menu get-tieneSegundoPlato))
-;     (bind ?postre (send ?menu get-tienePostre))
-;     (bind ?bebida (send ?menu get-tieneBebida))
-;     (if (and (instancep ?primer-plato) (instance-existp ?primer-plato)) then
-;         (bind ?p1-precio (send ?primer-plato get-precio))
-;         (bind ?precio (+ ?precio ?p1-precio))
-;         (printout t "Adding PrimerPlato price: " ?p1-precio ", Total: " ?precio crlf)
-;     else
-;         (printout t "Debug: PrimerPlato = " ?primer-plato ", Is instance? " (instancep ?primer-plato) ", Class: " (class ?primer-plato) crlf)
-;         (printout t "Skipping PrimerPlato: Not a valid instance" crlf))
-;     (if (and (instancep ?segundo-plato) (instance-existp ?segundo-plato)) then
-;         (bind ?p2-precio (send ?segundo-plato get-precio))
-;         (bind ?precio (+ ?precio ?p2-precio))
-;         (printout t "Adding SegundoPlato price: " ?p2-precio ", Total: " ?precio crlf)
-;     else
-;         (printout t "Debug: SegundoPlato = " ?segundo-plato ", Is instance? " (instancep ?segundo-plato) ", Class: " (class ?segundo-plato) crlf)
-;         (printout t "Skipping SegundoPlato: Not a valid instance" crlf))
-;     (if (and (instancep ?postre) (instance-existp ?postre)) then
-;         (bind ?p3-precio (send ?postre get-precio))
-;         (bind ?precio (+ ?precio ?p3-precio))
-;         (printout t "Adding Postre price: " ?p3-precio ", Total: " ?precio crlf)
-;     else
-;         (printout t "Debug: Postre = " ?postre ", Is instance? " (instancep ?postre) ", Class: " (class ?postre) crlf)
-;         (printout t "Skipping Postre: Not a valid instance" crlf))
-;     (if (and (instancep ?bebida) (instance-existp ?bebida)) then
-;         (bind ?b-precio (send ?bebida get-precio))
-;         (bind ?precio (+ ?precio ?b-precio))
-;         (printout t "Adding Bebida price: " ?b-precio ", Total: " ?precio crlf)
-;     else
-;         (printout t "Debug: Bebida = " ?bebida ", Is instance? " (instancep ?bebida) ", Class: " (class ?bebida) crlf)
-;         (printout t "Skipping Bebida: Not a valid instance" crlf))
-;     (printout t "Final Total: " ?precio crlf)
-;     ?precio)
 
 
 (deffunction recolectar-restricciones ()
@@ -197,13 +189,18 @@
     (bind ?tipos-comida-prohibidos (get-TipoComidaProhibido "¿Qué tipos de comida deseas prohibir? (e.g., Vegano, Español)"))
     (if (neq ?tipos-comida-prohibidos (create$ "ninguno")) then
         (send [RestriccionesUsuario] put-prohibeTipoComida ?tipos-comida-prohibidos))
-    (bind ?tipos-bebidas-prohibidas (get-TipoBebidaProhibido "¿Qué tipos de bebida deseas prohibir? (e.g., Alcohol, Zumo)"))
-    (if (neq ?tipos-bebidas-prohibidas (create$ "ninguno")) then
-        (send [RestriccionesUsuario] put-prohibeTipoBebida ?tipos-bebidas-prohibidas))
     (bind ?ingredientes-prohibidos (get-ingredienteProhibido "¿Qué ingredientes están prohibidos?"))
     (if (neq ?ingredientes-prohibidos (create$ "ninguno")) then
         (send [RestriccionesUsuario] put-prohibeIngrediente ?ingredientes-prohibidos))
     (bind ?mes (get-time "¿En qué mes se celebra el evento?"))
+    (bind ?tipos-bebidas-prohibidas (get-TipoBebidaProhibido "¿Qué tipos de bebida deseas prohibir? (e.g., Alcohol, Zumo)"))
+    (if (neq ?tipos-bebidas-prohibidas (create$ "ninguno")) then
+        (send [RestriccionesUsuario] put-prohibeTipoBebida ?tipos-bebidas-prohibidas))
+    ;(bind ?bebida-por-plato (get-bebidaPorPlato))
+    ;(if (eq ?bebida-por-plato 1) then
+    ;    (send [RestriccionesUsuario] put-bebidaParaCadaPlato TRUE)
+    ;else
+    ;    (send [RestriccionesUsuario] put-bebidaParaCadaPlato FALSE))
     (send [EventoUsuario] put-tieneMes ?mes)
     (bind ?tipo-evento (get-TipoEvento "¿Qué tipo de evento es? (e.g., Familiar, Congreso)"))
     (send [EventoUsuario] put-tieneTipoEvento ?tipo-evento)
@@ -215,7 +212,7 @@
     (create$ [EventoUsuario] [RestriccionesUsuario])
 )
 
-(deffunction elegir-menu (?min ?max ?e)
+(deffunction elegir-menu-una-bebida (?min ?max ?e)
   (bind ?resultado FALSE)
   (foreach ?m (find-all-instances ((?m Menu)) TRUE)
     (if (and
@@ -239,85 +236,6 @@
       (printout t "No se ha encontrado un plato de coste bajo" crlf)
       (printout t "===============================" crlf crlf))
     )
-
-; (deffunction actualizar-precios(?min ?max)
-;     (bind ?*PRECIO_MINIMO* ?min)
-;     (bind ?*PRECIO_MAXIMO* ?max)
-;     (bind ?part (/ (- ?max ?min) 3))
-;     (bind ?*PRECIO_BAJO* + ?min ?part)
-;     (bind ?*PRECIO_MEDIO* + ?min (* ?part 2))
-;     (bind ?*PRECIO_ALTO* ?max)
-; )
-
-
-
-; (defrule generar-menu-con-una-bebida
-;     "Genera un único menú por cada parte del precio con una bebida"
-;     (object (is-a Restriccion)
-;             (condicionPrecioMin ?min)
-;             (condicionPrecioMax ?max))
-;     ?p1 <- (object (is-a PrimerPlato)
-;                     (esIncompatibleCon $?comp1)
-;                     (precio ?precio1))
-;     ?p2 <- (object (is-a SegundoPlato)
-;                     (esIncompatibleCon $?comp2)
-;                     (precio ?precio2))
-;     ?p3 <- (object (is-a Postre)
-;                     (esIncompatibleCon $?comp3)
-;                     (precio ?precio3))
-;     ?b <- (object (is-a Bebida)
-;                   (esIncompatibleCon $?compb)
-;                   (precio ?preciob))
-
-;     (test (not (member$ ?p2 ?comp1)))
-;     (test (not (member$ ?p3 ?comp1)))
-;     (test (not (member$ ?b ?comp1)))
-;     (test (not (member$ ?p1 ?comp2)))
-;     (test (not (member$ ?p3 ?comp2)))
-;     (test (not (member$ ?b ?comp2)))
-;     (test (not (member$ ?p1 ?comp3)))
-;     (test (not (member$ ?p2 ?comp3)))
-;     (test (not (member$ ?b ?comp3)))
-;     (test (not (member$ ?p1 ?compb)))
-;     (test (not (member$ ?p2 ?compb)))
-;     (test (not (member$ ?p3 ?compb)))
-
-;     (test (and
-;         (>= (get-price(create$ ?precio1 ?precio2 ?precio3 ?preciob)) ?min)
-;         (<= (get-price(create$ ?precio1 ?precio2 ?precio3 ?preciob)) ?max)))
-
-;     (bind ?precioTotal (get-price(create$ ?precio1 ?precio2 ?precio3 ?preciob)))
-;     (bind ?parte (calcular-parte ?precioTotal ?min ?max))
-
-;     (not (ParteOcupada (parte ?parte))) ; aún no hay menú en esta parte
-  
-;     =>
-;     (assert (ParteOcupada (parte ?parte))) ; marcar parte como ocupada
-
-;     (bind ?menu (make-instance of Menu
-;                     (tienePrimerPlato ?p1)
-;                     (tieneSegundoPlato ?p2)
-;                     (tienePostre ?p3)
-;                     (tieneBebida (create$ ?b))
-;                     (precio ?precioTotal)
-;                     (puntuacion 0.9)))
-
-;     (printout t "Menú generado en " ?parte ": "
-;                  (send ?p1 get-nombre) ", "
-;                  (send ?p2 get-nombre) ", "
-;                  (send ?p3 get-nombre) ", "
-;                  (send ?b get-nombre) ", Precio: "
-;                  (send ?menu get-precio) crlf))
-
-; (deffunction calcular-parte (?precio ?min ?max)
-;    (bind ?part (/ (- ?max ?min) 3))
-;    (if (<= ?precio (+ ?min ?part)) then
-;        (return "part1")
-;    else
-;        (if (<= ?precio (+ ?min (* ?part 2))) then
-;            (return "part2")
-;        else
-;            (return "part3"))))
 
 (defglobal
   ?*TIPO_EVENTO* = (get-all-instances-of TipoEvento)

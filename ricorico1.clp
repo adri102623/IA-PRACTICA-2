@@ -37,10 +37,6 @@
     (is-a Alimento)
     (role concrete)
     (pattern-match reactive)
-    ;;; Relaciona un ingrediente o un plato con los meses del año en los que est disponible o puede ser preparado. Permite gestionar la estacionalidad de los alimentos y la generación de menús.
-    (multislot disponibleEn
-        (type INSTANCE)
-        (create-accessor read-write))
     ;;; Restriccion para saber si un plato es adeucado para un evento
     (multislot esAdecuadoParaEvento
         (type INSTANCE)
@@ -103,29 +99,12 @@
     (multislot tieneTipoIngrediente
         (type INSTANCE)
         (create-accessor read-write))
-    ;;; Cantidad de energía que aporta un ingrediente, expresada en kilocalorías (kcal).
-    (slot calorias
-        (type INTEGER)
-        (create-accessor read-write))
-    ;;; Gramos de carbohidratos presentes en un ingrediente o alimento.
-    (slot carbohidratos
-        (type INTEGER)
-        (create-accessor read-write))
-    ;;; Miligramos de colesterol contenidos en un ingrediente.
-    (slot colesterol
-        (type INTEGER)
-        (create-accessor read-write))
-    ;;; Gramos de grasas totales presentes en un ingrediente.
-    (slot grasas
-        (type INTEGER)
-        (create-accessor read-write))
-    ;;; Gramos de proteínas contenidos en un ingrediente.
-    (slot proteinas
-        (type INTEGER)
-        (create-accessor read-write))
-    ;;; Nombre identificativo del alimento o ingrediente.
     (slot nombre
         (type STRING)
+        (create-accessor read-write))
+    ;;; Relaciona un ingrediente o un plato con los meses del año en los que est disponible o puede ser preparado. Permite gestionar la estacionalidad de los alimentos y la generación de menús.
+    (multislot disponibleEn
+        (type INSTANCE)
         (create-accessor read-write))
 )
 
@@ -195,6 +174,11 @@
     ;;; Precio mínimo que un usuario espera gastar en el menú completo.
     (slot condicionPrecioMin
         (type FLOAT)
+        (create-accessor read-write))
+    ;;; Indica si el usuario quiere una bebida por plato. En caso falso, se confeccionará una bebida para todo el menú
+    (slot bebidaParaCadaPlato
+        (type SYMBOL)
+        (allowed-symbols TRUE FALSE)
         (create-accessor read-write))
 )
 
@@ -401,243 +385,147 @@
 ([Lechuga] of Ingrediente
     (nombre "Lechuga")
     (tieneTipoIngrediente [Verdura])
-    (calorias 15)          ; por 100g, aproximado
-    (carbohidratos 3)      ; por 100g, aproximado
-    (colesterol 0)         ; por 100g, aproximado
-    (grasas 0)             ; por 100g, aproximado
-    (proteinas 1)          ; por 100g, aproximado
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([Pollo] of Ingrediente
     (nombre "Pollo")
     (tieneTipoIngrediente [Carne])
-    (calorias 165)         ; por 100g, aproximado
-    (carbohidratos 0)      ; por 100g, aproximado
-    (colesterol 85)        ; por 100g, aproximado
-    (grasas 3)             ; por 100g, aproximado
-    (proteinas 31)         ; por 100g, aproximado
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([QuesoParmesano] of Ingrediente
     (nombre "Queso Parmesano")
     (tieneTipoIngrediente [Lacteo])
-    (calorias 431)         ; por 100g, aproximado
-    (carbohidratos 4)      ; por 100g, aproximado
-    (colesterol 88)        ; por 100g, aproximado
-    (grasas 29)            ; por 100g, aproximado
-    (proteinas 38)         ; por 100g, aproximado
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([Crutones] of Ingrediente
     (nombre "Crutones")
     (tieneTipoIngrediente [Pan])
-    (calorias 400)         ; por 100g, aproximado
-    (carbohidratos 70)     ; por 100g, aproximado
-    (colesterol 0)         ; por 100g, aproximado
-    (grasas 10)            ; por 100g, aproximado
-    (proteinas 10)         ; por 100g, aproximado
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([SalsaCesar] of Ingrediente
     (nombre "Salsa César")
     (tieneTipoIngrediente [Salsa])
-    (calorias 500)         ; por 100g, aproximado
-    (carbohidratos 5)      ; por 100g, aproximado
-    (colesterol 50)        ; por 100g, aproximado
-    (grasas 50)            ; por 100g, aproximado
-    (proteinas 2)          ; por 100g, aproximado
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ;;; Ingredientes para Solomillo de Cerdo (sin precio)
 ([Cerdo] of Ingrediente
     (nombre "Cerdo")
     (tieneTipoIngrediente [Carne])
-    (calorias 200)         ; por 100g, aproximado
-    (carbohidratos 0)      ; por 100g, aproximado
-    (colesterol 80)        ; por 100g, aproximado
-    (grasas 10)            ; por 100g, aproximado
-    (proteinas 25)         ; por 100g, aproximado
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([VinoTinto] of Ingrediente
     (nombre "Vino Tinto")
     (tieneTipoIngrediente [Salsa]) ; usado como parte de la salsa
-    (calorias 85)          ; por 100ml, aproximado
-    (carbohidratos 3)      ; por 100ml, aproximado
-    (colesterol 0)         ; por 100ml, aproximado
-    (grasas 0)             ; por 100ml, aproximado
-    (proteinas 0)          ; por 100ml, aproximado
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([Ajo] of Ingrediente
     (nombre "Ajo")
     (tieneTipoIngrediente [Condimento])
-    (calorias 150)         ; por 100g, aproximado
-    (carbohidratos 33)     ; por 100g, aproximado
-    (colesterol 0)         ; por 100g, aproximado
-    (grasas 0)             ; por 100g, aproximado
-    (proteinas 6)          ; por 100g, aproximado
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([Patata] of Ingrediente
     (nombre "Patata")
     (tieneTipoIngrediente [Verdura])
-    (calorias 80)          ; por 100g, aproximado
-    (carbohidratos 18)     ; por 100g, aproximado
-    (colesterol 0)         ; por 100g, aproximado
-    (grasas 0)             ; por 100g, aproximado
-    (proteinas 2)          ; por 100g, aproximado
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([AceiteOliva] of Ingrediente
     (nombre "Aceite de Oliva")
     (tieneTipoIngrediente [Grasa])
-    (calorias 900)         ; por 100ml, aproximado
-    (carbohidratos 0)      ; por 100ml, aproximado
-    (colesterol 0)         ; por 100ml, aproximado
-    (grasas 100)           ; por 100ml, aproximado
-    (proteinas 0)          ; por 100ml, aproximado
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ;;; Ingredientes para Tarta de Queso (sin precio)
 ([QuesoCrema] of Ingrediente
     (nombre "Queso Crema")
     (tieneTipoIngrediente [Lacteo])
-    (calorias 350)         ; por 100g, aproximado
-    (carbohidratos 4)      ; por 100g, aproximado
-    (colesterol 100)       ; por 100g, aproximado
-    (grasas 35)            ; por 100g, aproximado
-    (proteinas 6)          ; por 100g, aproximado
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([Azucar] of Ingrediente
     (nombre "Azúcar")
     (tieneTipoIngrediente [Endulzante])
-    (calorias 400)         ; por 100g, aproximado
-    (carbohidratos 100)    ; por 100g, aproximado
-    (colesterol 0)         ; por 100g, aproximado
-    (grasas 0)             ; por 100g, aproximado
-    (proteinas 0)          ; por 100g, aproximado
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([FrutosRojos] of Ingrediente
     (nombre "Frutos Rojos")
     (tieneTipoIngrediente [Fruta])
-    (calorias 50)          ; por 100g, aproximado
-    (carbohidratos 12)     ; por 100g, aproximado
-    (colesterol 0)         ; por 100g, aproximado
-    (grasas 0)             ; por 100g, aproximado
-    (proteinas 1)          ; por 100g, aproximado
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([Galleta] of Ingrediente
     (nombre "Galleta")
     (tieneTipoIngrediente [Cereal])
-    (calorias 450)         ; por 100g, aproximado
-    (carbohidratos 70)     ; por 100g, aproximado
-    (colesterol 10)        ; por 100g, aproximado
-    (grasas 15)            ; por 100g, aproximado
-    (proteinas 6)          ; por 100g, aproximado
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([PescadoI] of Ingrediente
     (nombre "Pescado")
     (tieneTipoIngrediente [Pescado])
-    (calorias 120)         ; por 100g, aproximado (merluza)
-    (carbohidratos 0)      ; por 100g
-    (colesterol 60)        ; por 100g
-    (grasas 2)             ; por 100g
-    (proteinas 22)         ; por 100g
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([Arroz] of Ingrediente
     (nombre "Arroz")
     (tieneTipoIngrediente [Cereal])
-    (calorias 130)         ; por 100g, aproximado
-    (carbohidratos 28)     ; por 100g
-    (colesterol 0)         ; por 100g
-    (grasas 0.3)           ; por 100g
-    (proteinas 2.7)        ; por 100g
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([Champinon] of Ingrediente
     (nombre "Champiñón")
     (tieneTipoIngrediente [Vegetal])
-    (calorias 22)          ; por 100g, aproximado
-    (carbohidratos 3.3)    ; por 100g
-    (colesterol 0)         ; por 100g
-    (grasas 0.3)           ; por 100g
-    (proteinas 3.1)        ; por 100g
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([Nata] of Ingrediente
     (nombre "Nata")
     (tieneTipoIngrediente [Lácteo])
-    (calorias 300)         ; por 100g, aproximado
-    (carbohidratos 3)      ; por 100g
-    (colesterol 100)       ; por 100g
-    (grasas 30)            ; por 100g
-    (proteinas 2)          ; por 100g
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([Manzana] of Ingrediente
     (nombre "Manzana")
     (tieneTipoIngrediente [Fruta])
-    (calorias 52)          ; por 100g, aproximado
-    (carbohidratos 14)     ; por 100g
-    (colesterol 0)         ; por 100g
-    (grasas 0.2)           ; por 100g
-    (proteinas 0.3)        ; por 100g
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([Canela] of Ingrediente
     (nombre "Canela")
     (tieneTipoIngrediente [Especia])
-    (calorias 247)         ; por 100g, aproximado
-    (carbohidratos 81)     ; por 100g
-    (colesterol 0)         ; por 100g
-    (grasas 1.2)           ; por 100g
-    (proteinas 4)          ; por 100g
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([Limon] of Ingrediente
     (nombre "Limón")
     (tieneTipoIngrediente [Fruta])
-    (calorias 29)          ; por 100g, aproximado
-    (carbohidratos 9)      ; por 100g
-    (colesterol 0)         ; por 100g
-    (grasas 0.3)           ; por 100g
-    (proteinas 1.1)        ; por 100g
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([Menta] of Ingrediente
     (nombre "Menta")
     (tieneTipoIngrediente [Hierba])
-    (calorias 70)          ; por 100g, aproximado
-    (carbohidratos 15)     ; por 100g
-    (colesterol 0)         ; por 100g
-    (grasas 1)             ; por 100g
-    (proteinas 3.8)        ; por 100g
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([Azucar] of Ingrediente
     (nombre "Azúcar")
     (tieneTipoIngrediente [Edulcorante])
-    (calorias 387)         ; por 100g, aproximado
-    (carbohidratos 100)    ; por 100g
-    (colesterol 0)         ; por 100g
-    (grasas 0)             ; por 100g
-    (proteinas 0)          ; por 100g
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 ([QuesoFeta] of Ingrediente
     (nombre "Queso Feta")
     (tieneTipoIngrediente [Lácteo])
-    (calorias 264)         ; por 100g, aproximado
-    (carbohidratos 4)      ; por 100g
-    (colesterol 89)        ; por 100g
-    (grasas 21)            ; por 100g
-    (proteinas 14)         ; por 100g
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre])
 )
 
 
@@ -647,7 +535,6 @@
     (dificultad 2)         ; media
     (tieneIngredientes [Champinon] [Nata] [Cebolla] [AceiteOliva])
     (esDeTipoComida [Clasico] [Caliente] [Vegetariano])
-    (disponibleEn [Enero] [Febrero] [Marzo] [Octubre] [Noviembre] [Diciembre]) ; meses fríos
     (esAdecuadoParaEvento [Familiar] [Congreso])
     (esIncompatibleCon ))
 
@@ -657,7 +544,6 @@
     (dificultad 1)         ; fácil
     (tieneIngredientes [Lechuga] [Tomate] [Aceituna] [QuesoFeta] [AceiteOliva])
     (esDeTipoComida [Frio] [Vegetariano] [Mediterraneo])
-    (disponibleEn [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre]) ; meses cálidos
     (esAdecuadoParaEvento [Familiar] [Congreso] [Boda])
     (esIncompatibleCon ))
 
@@ -668,7 +554,6 @@
     (dificultad 3)         ; media-alta
     (tieneIngredientes [Arroz] [Pollo] [Pescado] [Pimiento] [Azafran])
     (esDeTipoComida [Clasico] [Caliente] [Mediterraneo])
-    (disponibleEn [Mayo] [Junio] [Julio] [Agosto] [Septiembre]) ; meses cálidos
     (esAdecuadoParaEvento [Familiar] [Boda])
     (esIncompatibleCon ))
 
@@ -678,7 +563,6 @@
     (dificultad 3)         ; media-alta
     (tieneIngredientes [Pescado] [Limon] [Perejil] [AceiteOliva])
     (esDeTipoComida [Frio] [Moderno] [Pescado])
-    (disponibleEn [Mayo] [Junio] [Julio] [Agosto] [Septiembre]) ; meses cálidos
     (esAdecuadoParaEvento [Congreso] [Boda])
     (esIncompatibleCon ))
 
@@ -688,7 +572,6 @@
     (dificultad 2)         ; media
     (tieneIngredientes [Manzana] [Canela] [Azucar] [Harina] [Mantequilla])
     (esDeTipoComida [Dulce] [Clasico])
-    (disponibleEn [Septiembre] [Octubre] [Noviembre] [Diciembre]) ; otoño-invierno
     (esAdecuadoParaEvento [Familiar] [Boda])
     (esIncompatibleCon ))
 
@@ -698,7 +581,6 @@
     (dificultad 1)         ; fácil
     (tieneIngredientes [Limon] [Azucar] [Menta])
     (esDeTipoComida [Frio] [Dulce] [Moderno])
-    (disponibleEn [Junio] [Julio] [Agosto]) ; verano
     (esAdecuadoParaEvento [Congreso] [Boda])
     (esIncompatibleCon ))
 
@@ -729,7 +611,6 @@
     (dificultad 2)         ; baja dificultad (1-5)
     (tieneIngredientes [Lechuga] [Pollo] [QuesoParmesano] [Crutones] [SalsaCesar])
     (esDeTipoComida [Clasico] [Frio]) 
-    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]) ; todo el año
     (esAdecuadoParaEvento [Familiar] [Congreso])
     (esIncompatibleCon )
 )
@@ -741,7 +622,6 @@
     (dificultad 2)         ; dificultad media (1-5)
     (tieneIngredientes [Cerdo] [VinoTinto] [Ajo] [Patata] [AceiteOliva])
     (esDeTipoComida [Clasico] [Caliente] [Moderno])
-    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]) ; todo el año
     (esAdecuadoParaEvento [Familiar] [Congreso])
     (esIncompatibleCon ))
 
@@ -752,7 +632,6 @@
     (dificultad 2)         ; dificultad media (1-5)
     (tieneIngredientes [QuesoCrema] [Azucar] [Huevo] [FrutosRojos] [Galleta])
     (esDeTipoComida [Clasico] [Frio])
-    (disponibleEn [Mayo] [Junio] [Julio]) ; limitado por frutos rojos
     (esAdecuadoParaEvento [Familiar] [Congreso])
     (esIncompatibleCon ))
 )
