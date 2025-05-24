@@ -10,7 +10,7 @@
     (role concrete)
     (pattern-match reactive)
     ;;; Relación simétrica que indica si un Alimento es compatible con otro en un menú.
-    (multislot esCompatibleCon
+    (multislot esIncompatibleCon
         (type INSTANCE)
         (create-accessor read-write))
     ;;; Nombre identificativo del alimento o ingrediente.
@@ -540,12 +540,186 @@
     (proteinas 6)          ; por 100g, aproximado
 )
 
+([PescadoI] of Ingrediente
+    (nombre "Pescado")
+    (tieneTipoIngrediente [Pescado])
+    (calorias 120)         ; por 100g, aproximado (merluza)
+    (carbohidratos 0)      ; por 100g
+    (colesterol 60)        ; por 100g
+    (grasas 2)             ; por 100g
+    (proteinas 22)         ; por 100g
+)
+
+([Arroz] of Ingrediente
+    (nombre "Arroz")
+    (tieneTipoIngrediente [Cereal])
+    (calorias 130)         ; por 100g, aproximado
+    (carbohidratos 28)     ; por 100g
+    (colesterol 0)         ; por 100g
+    (grasas 0.3)           ; por 100g
+    (proteinas 2.7)        ; por 100g
+)
+
+([Champinon] of Ingrediente
+    (nombre "Champiñón")
+    (tieneTipoIngrediente [Vegetal])
+    (calorias 22)          ; por 100g, aproximado
+    (carbohidratos 3.3)    ; por 100g
+    (colesterol 0)         ; por 100g
+    (grasas 0.3)           ; por 100g
+    (proteinas 3.1)        ; por 100g
+)
+
+([Nata] of Ingrediente
+    (nombre "Nata")
+    (tieneTipoIngrediente [Lácteo])
+    (calorias 300)         ; por 100g, aproximado
+    (carbohidratos 3)      ; por 100g
+    (colesterol 100)       ; por 100g
+    (grasas 30)            ; por 100g
+    (proteinas 2)          ; por 100g
+)
+
+([Manzana] of Ingrediente
+    (nombre "Manzana")
+    (tieneTipoIngrediente [Fruta])
+    (calorias 52)          ; por 100g, aproximado
+    (carbohidratos 14)     ; por 100g
+    (colesterol 0)         ; por 100g
+    (grasas 0.2)           ; por 100g
+    (proteinas 0.3)        ; por 100g
+)
+
+([Canela] of Ingrediente
+    (nombre "Canela")
+    (tieneTipoIngrediente [Especia])
+    (calorias 247)         ; por 100g, aproximado
+    (carbohidratos 81)     ; por 100g
+    (colesterol 0)         ; por 100g
+    (grasas 1.2)           ; por 100g
+    (proteinas 4)          ; por 100g
+)
+
+([Limon] of Ingrediente
+    (nombre "Limón")
+    (tieneTipoIngrediente [Fruta])
+    (calorias 29)          ; por 100g, aproximado
+    (carbohidratos 9)      ; por 100g
+    (colesterol 0)         ; por 100g
+    (grasas 0.3)           ; por 100g
+    (proteinas 1.1)        ; por 100g
+)
+
+([Menta] of Ingrediente
+    (nombre "Menta")
+    (tieneTipoIngrediente [Hierba])
+    (calorias 70)          ; por 100g, aproximado
+    (carbohidratos 15)     ; por 100g
+    (colesterol 0)         ; por 100g
+    (grasas 1)             ; por 100g
+    (proteinas 3.8)        ; por 100g
+)
+
+([Azucar] of Ingrediente
+    (nombre "Azúcar")
+    (tieneTipoIngrediente [Edulcorante])
+    (calorias 387)         ; por 100g, aproximado
+    (carbohidratos 100)    ; por 100g
+    (colesterol 0)         ; por 100g
+    (grasas 0)             ; por 100g
+    (proteinas 0)          ; por 100g
+)
+
+([QuesoFeta] of Ingrediente
+    (nombre "Queso Feta")
+    (tieneTipoIngrediente [Lácteo])
+    (calorias 264)         ; por 100g, aproximado
+    (carbohidratos 4)      ; por 100g
+    (colesterol 89)        ; por 100g
+    (grasas 21)            ; por 100g
+    (proteinas 14)         ; por 100g
+)
+
+
+([CremaChampinones] of PrimerPlato
+    (nombre "Crema de Champiñones")
+    (precio 7.5)           ; económico
+    (dificultad 2)         ; media
+    (tieneIngredientes [Champinon] [Nata] [Cebolla] [AceiteOliva])
+    (esDeTipoComida [Clasico] [Caliente] [Vegetariano])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Octubre] [Noviembre] [Diciembre]) ; meses fríos
+    (esAdecuadoParaEvento [Familiar] [Congreso])
+    (esIncompatibleCon ))
+
+([EnsaladaMediterranea] of PrimerPlato
+    (nombre "Ensalada Mediterránea")
+    (precio 6.0)           ; bajo
+    (dificultad 1)         ; fácil
+    (tieneIngredientes [Lechuga] [Tomate] [Aceituna] [QuesoFeta] [AceiteOliva])
+    (esDeTipoComida [Frio] [Vegetariano] [Mediterraneo])
+    (disponibleEn [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre]) ; meses cálidos
+    (esAdecuadoParaEvento [Familiar] [Congreso] [Boda])
+    (esIncompatibleCon ))
+
+
+([PaellaMixta] of SegundoPlato
+    (nombre "Paella Mixta")
+    (precio 14.0)          ; elevado
+    (dificultad 3)         ; media-alta
+    (tieneIngredientes [Arroz] [Pollo] [Pescado] [Pimiento] [Azafran])
+    (esDeTipoComida [Clasico] [Caliente] [Mediterraneo])
+    (disponibleEn [Mayo] [Junio] [Julio] [Agosto] [Septiembre]) ; meses cálidos
+    (esAdecuadoParaEvento [Familiar] [Boda])
+    (esIncompatibleCon ))
+
+([MerluzaVapor] of SegundoPlato
+    (nombre "Merluza al Vapor con Salsa de Limón")
+    (precio 13.0)          ; algo elevado
+    (dificultad 3)         ; media-alta
+    (tieneIngredientes [Pescado] [Limon] [Perejil] [AceiteOliva])
+    (esDeTipoComida [Frio] [Moderno] [Pescado])
+    (disponibleEn [Mayo] [Junio] [Julio] [Agosto] [Septiembre]) ; meses cálidos
+    (esAdecuadoParaEvento [Congreso] [Boda])
+    (esIncompatibleCon ))
+
+    ([TartaManzana] of Postre
+    (nombre "Tarta de Manzana con Canela")
+    (precio 5.5)           ; económico
+    (dificultad 2)         ; media
+    (tieneIngredientes [Manzana] [Canela] [Azucar] [Harina] [Mantequilla])
+    (esDeTipoComida [Dulce] [Clasico])
+    (disponibleEn [Septiembre] [Octubre] [Noviembre] [Diciembre]) ; otoño-invierno
+    (esAdecuadoParaEvento [Familiar] [Boda])
+    (esIncompatibleCon ))
+
+([SorbeteLimon] of Postre
+    (nombre "Sorbete de Limón")
+    (precio 4.0)           ; bajo
+    (dificultad 1)         ; fácil
+    (tieneIngredientes [Limon] [Azucar] [Menta])
+    (esDeTipoComida [Frio] [Dulce] [Moderno])
+    (disponibleEn [Junio] [Julio] [Agosto]) ; verano
+    (esAdecuadoParaEvento [Congreso] [Boda])
+    (esIncompatibleCon ))
+
+    ([Limonada] of Bebida
+    (nombre "Limonada Casera")
+    (precio 2.5)           ; bajo
+    (tieneTipoBebida [Zumo])
+    (esIncompatibleCon ))
+
+([VinoTintoReserva] of Bebida
+    (nombre "Vino Tinto Reserva")
+    (precio 6.0)           ; moderado
+    (tieneTipoBebida [Alcohol])
+    (esIncompatibleCon ))
+
 ;;; Vino Blanco (actualizado para compatibilidad)
 ([VinoBlanco] of Bebida
     (nombre "Vino Blanco")
     (tieneTipoBebida [Alcohol])
     (precio 5.0)           ; precio ficticio por botella
-    (esCompatibleCon [EnsaladaCesar] [SolomilloCerdo] [TartaQueso])
+    (esIncompatibleCon )
 )
 
 ;;; Ensalada César (actualizada para compatibilidad)
@@ -557,7 +731,7 @@
     (esDeTipoComida [Clasico] [Frio]) 
     (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]) ; todo el año
     (esAdecuadoParaEvento [Familiar] [Congreso])
-    (esCompatibleCon [VinoBlanco] [SolomilloCerdo] [TartaQueso])
+    (esIncompatibleCon )
 )
 
 ;;; Solomillo de Cerdo como SegundoPlato
@@ -569,8 +743,7 @@
     (esDeTipoComida [Clasico] [Caliente] [Moderno])
     (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]) ; todo el año
     (esAdecuadoParaEvento [Familiar] [Congreso])
-    (esCompatibleCon [VinoBlanco] [EnsaladaCesar] [TartaQueso])
-)
+    (esIncompatibleCon ))
 
 ;;; Tarta de Queso como Postre
 ([TartaQueso] of Postre
@@ -581,7 +754,6 @@
     (esDeTipoComida [Clasico] [Frio])
     (disponibleEn [Mayo] [Junio] [Julio]) ; limitado por frutos rojos
     (esAdecuadoParaEvento [Familiar] [Congreso])
-    (esCompatibleCon [VinoBlanco] [EnsaladaCesar] [SolomilloCerdo])
-)
+    (esIncompatibleCon ))
 )
 
