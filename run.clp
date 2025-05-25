@@ -4,12 +4,12 @@
 (reset)
 (run)
 ninguno
-ninguno
+[LactoseFree]
 ninguno
 [Junio]
 ninguno
-1
-[Congreso]
+2
+[Familiar]
 200
 10
 100

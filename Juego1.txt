@@ -1,0 +1,176 @@
+;;;Menu LactoseFree
+
+;PRIMER PLATO
+([EnsaladaCaprese] of PrimerPlato
+(nombre "Ensalada Caprese")
+(precio 6.0)           ; bajo
+(dificultad 2)         ; media
+(tieneIngredientes [Tomate] [Albahaca] [AceiteOliva] [VinagreBalsamico])
+(esDeTipoComida [Vegetariano] [Frio] [Italiano] [LactoseFree])
+(esAdecuadoParaEvento [Familiar] [Congreso])
+(esIncompatibleCon ))
+
+
+;SEGUNDO PLATO
+([PolloLimon] of SegundoPlato
+(nombre "Pollo al Limón")
+(precio 12.0)          ; medio
+(dificultad 2)         ; media
+(tieneIngredientes [Pollo] [Limon] [Ajo] [AceiteOliva])
+(esDeTipoComida [Caliente] [Clasico] [LactoseFree])
+(esAdecuadoParaEvento [Familiar])
+(esIncompatibleCon ))
+
+;POSTRE
+([SorbeteMango] of Postre
+(nombre "Sorbete de Mango")
+(precio 4.5)           ; económico
+(dificultad 2)         ; media
+(tieneIngredientes [Mango] [Azucar] [Limon])
+(esDeTipoComida [Dulce] [Frio] [LactoseFree])
+(esAdecuadoParaEvento [Familiar])
+(esIncompatibleCon ))
+
+;BEBIDA
+([ZumoNaranja] of Bebida
+(nombre "Zumo de Naranja")
+(precio 2.5)           ; bajo
+(tieneTipoBebida [Zumo])
+(esIncompatibleCon ))
+
+
+;;;INGREDIENTES
+([Tomate] of Ingrediente
+(nombre "Tomate")
+(tieneTipoIngrediente [Verdura])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+
+([Albahaca] of Ingrediente
+(nombre "Albahaca")
+(tieneTipoIngrediente [Aromatizante])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+
+([AceiteOliva] of Ingrediente
+(nombre "Aceite de Oliva")
+(tieneTipoIngrediente [Grasa])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+
+([VinagreBalsamico] of Ingrediente
+(nombre "Vinagre Balsámico")
+(tieneTipoIngrediente [Condimento])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+
+([Pollo] of Ingrediente
+(nombre "Pollo")
+(tieneTipoIngrediente [Carne])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+
+([Limon] of Ingrediente
+(nombre "Limón")
+(tieneTipoIngrediente [Fruta])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+
+([Ajo] of Ingrediente
+(nombre "Ajo")
+(tieneTipoIngrediente [Condimento])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+
+([Mango] of Ingrediente
+(nombre "Mango")
+(tieneTipoIngrediente [Fruta])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+
+([Azucar] of Ingrediente
+(nombre "Azúcar")
+(tieneTipoIngrediente [Endulzante])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+
+([Naranja] of Ingrediente
+(nombre "Naranja")
+(tieneTipoIngrediente [Fruta])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+
+
+;;;MENU CON LACTOSA
+;PRIMER PLATO
+([Gazpacho] of PrimerPlato
+(nombre "Gazpacho")
+(precio 5.5)           ; bajo
+(dificultad 2)         ; media
+(tieneIngredientes [Tomate] [Pimiento] [Pepino] [Ajo] [AceiteOliva])
+(esDeTipoComida [Frio] [Español] [Vegetariano])
+(esAdecuadoParaEvento [Familiar] [Congreso])
+(esIncompatibleCon ))
+
+;SEGUNDO PLATO
+([DoradaPlancha] of SegundoPlato
+(nombre "Dorada a la Plancha")
+(precio 13.0)          ; medio
+(dificultad 2)         ; media
+(tieneIngredientes [Pescado] [Limon] [Perejil] [AceiteOliva])
+(esDeTipoComida [Caliente] [Mediterraneo])
+(esAdecuadoParaEvento [Familiar])
+(esIncompatibleCon ))
+
+;POSTRE
+([FlanVainilla] of Postre
+(nombre "Flan de Vainilla")
+(precio 4.0)           ; económico
+(dificultad 2)         ; media
+(tieneIngredientes [Huevo] [Azucar] [Vainilla] [Leche])
+(esDeTipoComida [Dulce] [Clasico])
+(esAdecuadoParaEvento [Familiar])
+(esIncompatibleCon ))
+
+;BEBIDA
+([AguaLimon] of Bebida
+(nombre "Agua con Limón")
+(precio 1.5)           ; bajo
+(tieneTipoBebida [Agua])
+(esIncompatibleCon ))
+
+;INGREDIENTES
+([Tomate] of Ingrediente
+(nombre "Tomate")
+(tieneTipoIngrediente [Verdura])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Pimiento] of Ingrediente
+(nombre "Pimiento")
+(tieneTipoIngrediente [Verdura])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Pepino] of Ingrediente
+(nombre "Pepino")
+(tieneTipoIngrediente [Verdura])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Ajo] of Ingrediente
+(nombre "Ajo")
+(tieneTipoIngrediente [Condimento])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([AceiteOliva] of Ingrediente
+(nombre "Aceite de Oliva")
+(tieneTipoIngrediente [Grasa])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Pescado] of Ingrediente
+(nombre "Pescado")
+(tieneTipoIngrediente [Pescado])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Limon] of Ingrediente
+(nombre "Limón")
+(tieneTipoIngrediente [Fruta])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Perejil] of Ingrediente
+(nombre "Perejil")
+(tieneTipoIngrediente [Aromatizante])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Huevo] of Ingrediente
+(nombre "Huevo")
+(tieneTipoIngrediente [Huevo])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Vainilla] of Ingrediente
+(nombre "Vainilla")
+(tieneTipoIngrediente [Especia])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Leche] of Ingrediente
+(nombre "Leche")
+(tieneTipoIngrediente [Lacteo])
+(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))

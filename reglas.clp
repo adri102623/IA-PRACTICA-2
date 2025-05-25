@@ -45,20 +45,30 @@
     (elegir-menu-multiples-bebida ?limite2 ?max "alto")
 )
 
-;;; Regla para filtrar platos por tipo de comida
-(defrule filtrar-por-tipo-comida "Descarta instancias de Plato que no sean del estilo que el usuario haya elegido"
+;;; Regla para filtrar platos por tipo de comida favorito
+(defrule filtrar-por-tipo-comida-favorito "Descarta instancias de Plato que no sean del estilo que el usuario haya elegido"
     (object (is-a Restriccion)
-            (esDeTipoComida $?tipos-comida&:(neq ?tipos-comida (create$)))
-            (prohibeTipoComida $?prohibidos))
+            (esDeTipoComida $?tipos-comida&:(neq ?tipos-comida (create$))))
     ?plato <- (object (is-a Plato)
             (nombre ?nombre)
             (esDeTipoComida $?tipos-plato))
-    (test (or
-            (not (collection-contains-alo-element ?tipos-comida ?tipos-plato))
-            (collection-contains-alo-element ?prohibidos ?tipos-plato)))
+    (test (not (collection-contains-alo-element ?tipos-comida ?tipos-plato)))
     =>
-    ;(printout t "El plato " ?nombre "Ha sido eliminado debido a que no cumplia las preferencias culinarias del usuario." crlf)
+    (printout t "El plato " ?nombre " Ha sido eliminado debido a que no cumplia las preferencias culinarias del usuario." crlf)
     (send ?plato delete))
+
+;;; Regla para filtrar platos por tipo de comida favorito
+(defrule filtrar-por-tipo-comida-prohibido "Descarta instancias de Plato que no sean del estilo que el usuario haya elegido"
+    (object (is-a Restriccion)
+            (prohibeTipoComida $?prohibidos&:(neq ?prohibidos (create$))))
+    ?plato <- (object (is-a Plato)
+            (nombre ?nombre)
+            (esDeTipoComida $?tipos-plato))
+    (test (collection-contains-alo-element ?prohibidos ?tipos-plato))
+    =>
+    (printout t "El plato " ?nombre " Ha sido eliminado debido a que no cumplia las preferencias culinarias del usuario." crlf)
+    (send ?plato delete))
+
 
 ;;; Regla para excluir platos con ingredientes prohibidos
 (defrule filtrar-por-ingrediente-prohibido "Descarta platos si contienen ingredientes que están prohibidos"
@@ -94,13 +104,12 @@
     (test (not (member$ ?mes-evento $?meses-ingrediente)))
     (test (elemento-en-lista ?nombre-ingrediente $?ingredientes-plato))
     =>
-    ;(printout t "El ingrediente " ?ingredientes-plato " no está disponible en el mes " ?mes-evento)
-    (printout t "El plato " ?nombre-plato " Ha sido eliminado debido a que el ingrediente " ?nombre-ingrediente " no se puede obtener en este mes" crlf)
+    ;(printout t "El plato " ?nombre-plato " Ha sido eliminado debido a que el ingrediente " ?nombre-ingrediente " no se puede obtener en este mes" crlf)
     (send ?plato delete)
 )
 
 
-;;; Regla para filtrar por tipo de evento (Congreso → Moderno)
+;;; Regla para filtrar por tipo de evento 
 (defrule filtrar-por-tipo-evento
     (object (is-a Evento)
             (tieneTipoEvento ?e))
