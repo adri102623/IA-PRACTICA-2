@@ -21,7 +21,7 @@
     (nombre "CevichePescado")
     (precio 9.0)           ; medio
     (dificultad 3)         ; media-alta
-    (tieneIngredientes [PescadoI] [Limon] [Cilantro] [Cebolla])
+    (tieneIngredientes [Pescado] [Limon] [Cilantro] [Cebolla])
     (esDeTipoComida [Frio] [Pescado] [Internacional])
     (esAdecuadoParaEvento [Congreso])
     (esIncompatibleCon ))
@@ -42,13 +42,13 @@
     (tieneIngredientes [Calabaza] [Nata] [Cebolla] [Caldo])
     (esDeTipoComida [Caliente] [Vegetariano] [Clasico])
     (esAdecuadoParaEvento [Familiar])
-    (esIncompatibleCon ))
+    (esIncompatibleCon [PolloCurry]))
 
 ([Bruschetta] of PrimerPlato
     (nombre "Bruschetta")
     (precio 5.0)           ; bajo
     (dificultad 1)         ; baja
-    (tieneIngredientes [Tomate] [Pan] [Ajo] [AceiteOliva])
+    (tieneIngredientes [Tomate] [PanI] [Ajo] [AceiteOliva])
     (esDeTipoComida [Frio] [Vegetariano] [Italiano])
     (esAdecuadoParaEvento [Familiar] [Congreso])
     (esIncompatibleCon ))
@@ -87,14 +87,14 @@
     (tieneIngredientes [Garbanzo] [Tahini] [Limon] [Ajo])
     (esDeTipoComida [Frio] [Vegano] [Internacional])
     (esAdecuadoParaEvento [Familiar] [Congreso])
-    (esIncompatibleCon ))
+    (esIncompatibleCon [Baklava]))
 
 ;;;SEGUNDO PLATO
 
 ([SolomilloCerdo] of SegundoPlato
     (nombre "SolomilloCerdo")
     (precio 15.0)          ; medio
-    (dificultad 3)         ; media-alta
+    (dificultad 1)         ; media-alta
     (tieneIngredientes [Cerdo] [VinoTinto] [Ajo] [Romero])
     (esDeTipoComida [Caliente] [Carne] [Clasico])
     (esAdecuadoParaEvento [Familiar] [Congreso])
@@ -112,16 +112,16 @@
 ([PaellaMariscos] of SegundoPlato
     (nombre "PaellaMariscos")
     (precio 16.0)          ; medio-alto
-    (dificultad 4)         ; alta
+    (dificultad 2)         ; alta
     (tieneIngredientes [Arroz] [Gamba] [Calamar] [Pimiento])
     (esDeTipoComida [Caliente] [Marisco] [Español])
     (esAdecuadoParaEvento [Familiar])
-    (esIncompatibleCon ))
+    (esIncompatibleCon [Sangría]))
 
 ([PolloCurry] of SegundoPlato
     (nombre "PolloCurry")
     (precio 12.0)          ; medio
-    (dificultad 3)         ; media-alta
+    (dificultad 2)         ; media-alta
     (tieneIngredientes [Pollo] [Curry] [LecheCoco] [Cebolla])
     (esDeTipoComida [Caliente] [Carne] [Internacional])
     (esAdecuadoParaEvento [Familiar] [Congreso])
@@ -130,7 +130,7 @@
 ([BerenjenasRellenas] of SegundoPlato
     (nombre "BerenjenasRellenas")
     (precio 9.0)           ; bajo
-    (dificultad 3)         ; media-alta
+    (dificultad 2)         ; media-alta
     (tieneIngredientes [Berenjena] [Tomate] [QuesoMozzarella] [Albahaca])
     (esDeTipoComida [Caliente] [Vegetariano] [Italiano])
     (esAdecuadoParaEvento [Familiar])
@@ -139,7 +139,7 @@
 ([CorderoAsado] of SegundoPlato
     (nombre "CorderoAsado")
     (precio 17.0)          ; alto
-    (dificultad 4)         ; alta
+    (dificultad 2)         ; alta
     (tieneIngredientes [Cordero] [Ajo] [Romero] [AceiteOliva])
     (esDeTipoComida [Caliente] [Carne] [Clasico])
     (esAdecuadoParaEvento [Familiar])
@@ -157,7 +157,7 @@
 ([MerluzaSalsaVerde] of SegundoPlato
     (nombre "MerluzaSalsaVerde")
     (precio 13.0)          ; medio
-    (dificultad 3)         ; media-alta
+    (dificultad 2)         ; media-alta
     (tieneIngredientes [Merluza] [Perejil] [Ajo] [Caldo])
     (esDeTipoComida [Caliente] [Pescado] [Español])
     (esAdecuadoParaEvento [Congreso])
@@ -167,7 +167,7 @@
     (nombre "LasañaVegetal")
     (precio 10.0)          ; medio
     (dificultad 3)         ; media-alta
-    (tieneIngredientes [Pasta] [Calabaza] [QuesoMozzarella] [Tomate])
+    (tieneIngredientes [PastaI] [Calabaza] [QuesoMozzarella] [Tomate])
     (esDeTipoComida [Caliente] [Vegetariano] [Italiano])
     (esAdecuadoParaEvento [Familiar])
     (esIncompatibleCon ))
@@ -175,7 +175,7 @@
 ([TerneraWellington] of SegundoPlato
     (nombre "TerneraWellington")
     (precio 20.0)          ; alto
-    (dificultad 4)         ; alta
+    (dificultad 2)         ; alta
     (tieneIngredientes [Ternera] [Hojaldre] [Champiñones] [Panceta])
     (esDeTipoComida [Caliente] [Carne] [Internacional])
     (esAdecuadoParaEvento [Congreso])
@@ -211,7 +211,7 @@
 ([Tiramisu] of Postre
     (nombre "Tiramisu")
     (precio 7.0)           ; medio
-    (dificultad 3)         ; media-alta
+    (dificultad 2)         ; media-alta
     (tieneIngredientes [QuesoMascarpone] [Café] [Cacao] [Bizcocho])
     (esDeTipoComida [Dulce] [Italiano])
     (esAdecuadoParaEvento [Familiar] [Congreso])
@@ -220,7 +220,7 @@
 ([CoulantChocolate] of Postre
     (nombre "CoulantChocolate")
     (precio 6.5)           ; medio
-    (dificultad 3)         ; media-alta
+    (dificultad 2)         ; media-alta
     (tieneIngredientes [Chocolate] [Huevo] [Harina] [Mantequilla])
     (esDeTipoComida [Dulce] [Caliente])
     (esAdecuadoParaEvento [Familiar])
@@ -238,7 +238,7 @@
 ([CremaCatalana] of Postre
     (nombre "CremaCatalana")
     (precio 5.0)           ; bajo
-    (dificultad 3)         ; media-alta
+    (dificultad 2)         ; media-alta
     (tieneIngredientes [Leche] [Huevo] [Azucar] [Canela])
     (esDeTipoComida [Dulce] [Español])
     (esAdecuadoParaEvento [Familiar])
@@ -439,10 +439,10 @@
     (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
 ([Merluza] of Ingrediente
     (nombre "Merluza")
-    (tieneTipoIngrediente [Pescado])
+    (tieneTipoIngrediente [PescadoI])
     (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
-([Pasta] of Ingrediente
-    (nombre "Pasta")
+([PastaI] of Ingrediente
+    (nombre "PastaI")
     (tieneTipoIngrediente [Pasta])
     (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
 ([Hojaldre] of Ingrediente
@@ -491,7 +491,7 @@
     (tieneTipoIngrediente [Verdura])
     (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
 ([PescadoI] of Ingrediente
-    (nombre "Pescado")
+    (nombre "PescadoI")
     (tieneTipoIngrediente [Pescado])
     (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
 ([Limon] of Ingrediente
@@ -526,8 +526,8 @@
     (nombre "Caldo")
     (tieneTipoIngrediente [Liquido])
     (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
-([Pan] of Ingrediente
-    (nombre "Pan")
+([PanI] of Ingrediente
+    (nombre "PanI")
     (tieneTipoIngrediente [Pan])
     (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
 ([Ajo] of Ingrediente

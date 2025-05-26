@@ -566,7 +566,7 @@
 ([TartaQueso] of Postre
     (nombre "TartaQueso")
     (precio 6.0)           ; medio
-    (dificultad 3)         ; media-alta
+    (dificultad 2)         ; media-alta
     (tieneIngredientes [QuesoCrema] [Galleta] [Azucar] [Nata])
     (esDeTipoComida [Dulce] [Clasico])
     (esAdecuadoParaEvento [Familiar] [Congreso])
@@ -619,7 +619,7 @@
 
 ([CremaCatalana] of Postre
     (nombre "CremaCatalana")
-    (precio 5.0)           ; bajo
+    (precio 15.0)           ; bajo
     (dificultad 2)         ; media-alta
     (tieneIngredientes [Leche] [Huevo] [Azucar] [Canela])
     (esDeTipoComida [Dulce] [Español])
@@ -680,7 +680,7 @@
 
 ([VinoBlanco] of Bebida
     (nombre "VinoBlanco")
-    (precio 6.0)           ; medio
+    (precio 15.0)           ; medio
     (tieneTipoBebida [Alcohol])
     (esIncompatibleCon ))
 

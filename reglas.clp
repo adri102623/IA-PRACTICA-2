@@ -86,7 +86,7 @@
             (prohibeTipoBebida $?prohibidos&:(neq ?prohibidos (create$))))
     ?bebida <- (object (is-a Bebida)
             (nombre ?nombre)
-            (tieneTipoBebida ?tipo-bebida))
+            (tieneTipoBebida $?tipo-bebida))
     (test (collection-contains-alo-element ?prohibidos ?tipo-bebida))
     =>
     (printout t "Excluyendo " ?nombre " por contener ingredientes prohibidos." crlf)

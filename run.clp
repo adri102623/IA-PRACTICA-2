@@ -7,8 +7,8 @@
 [Frio] [Moderno] [Japonés]
 [Ajo]
 [Enero]
-ninguno
-1
+[Zumo]
+2
 [Familiar]
 600
 30
