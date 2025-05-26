@@ -54,7 +54,7 @@
             (esDeTipoComida $?tipos-plato))
     (test (not (collection-contains-alo-element ?tipos-comida ?tipos-plato)))
     =>
-    (printout t "El plato " ?nombre " Ha sido eliminado debido a que no cumplia las preferencias culinarias del usuario." crlf)
+    ;(printout t "El plato " ?nombre " Ha sido eliminado debido a que no cumplia las preferencias culinarias del usuario." crlf)
     (send ?plato delete))
 
 ;;; Regla para filtrar platos por tipo de comida favorito
@@ -66,7 +66,7 @@
             (esDeTipoComida $?tipos-plato))
     (test (collection-contains-alo-element ?prohibidos ?tipos-plato))
     =>
-    (printout t "El plato " ?nombre " Ha sido eliminado debido a que no cumplia las preferencias culinarias del usuario." crlf)
+    ;(printout t "El plato " ?nombre " Ha sido eliminado debido a que no cumplia las preferencias culinarias del usuario." crlf)
     (send ?plato delete))
 
 
@@ -79,6 +79,7 @@
     =>
     ;(printout t "Excluyendo " ?nombre " por contener ingredientes prohibidos." crlf)
     (send ?plato delete))
+
 
 (defrule filtrar-bebidas-por-tipo "Descarta bebidas si son del mismo tipo prohibido por el usuario"
     (object (is-a Restriccion)
@@ -106,6 +107,7 @@
     =>
     ;(printout t "El plato " ?nombre-plato " Ha sido eliminado debido a que el ingrediente " ?nombre-ingrediente " no se puede obtener en este mes" crlf)
     (send ?plato delete)
+    
 )
 
 
@@ -114,9 +116,11 @@
     (object (is-a Evento)
             (tieneTipoEvento ?e))
     ?plato <- (object (is-a Plato)
+            (nombre ?nombre-plato)
             (esAdecuadoParaEvento $?tipos))
     (test (not (member$ ?e ?tipos)))
     =>
+    ;(printout t "El plato " ?nombre-plato " Ha sido eliminado porque no es adeucado para el evento" crlf)
     (send ?plato delete))
 
 ;;; Regla para filtrar por dificultad según comensales
@@ -124,7 +128,7 @@
     (object (is-a Evento) (numeroComensales ?comensales&:(>= ?comensales 500)))
     ?p <- (object (is-a Plato) (nombre ?nombre) (dificultad ?d&:(> ?d 2)))
     =>
-    ; (printout t "El plato " ?nombre " Ha sido eliminado porque es muy complicado de para el número de comensales" crlf)
+    (printout t "El plato " ?nombre " Ha sido eliminado porque es muy complicado para el número de comensales" crlf)
     (send ?p delete))
 
 (defrule generar-menus-con-una-bebida "Genera un menú con una bebida por menú"
@@ -142,28 +146,32 @@
                     (esIncompatibleCon $?comp2)
                     (precio ?precio2))
     ?p3 <- (object (is-a Postre)
+                    (nombre ?n3)
                     (esIncompatibleCon $?comp3)
                     (precio ?precio3))
     ?b <- (object (is-a Bebida)
+                  (nombre ?bn)
                   (esIncompatibleCon $?compb)
                   (precio ?preciob))
     (test (not (eq ?n1 ?n2)))
-    (test (not (member$ ?p2 ?comp1)))
-    (test (not (member$ ?p3 ?comp1)))
-    (test (not (member$ ?b ?comp1)))
-    (test (not (member$ ?p1 ?comp2)))
-    (test (not (member$ ?p3 ?comp2)))
-    (test (not (member$ ?b ?comp2)))
-    (test (not (member$ ?p1 ?comp3)))
-    (test (not (member$ ?p2 ?comp3)))
-    (test (not (member$ ?b ?comp3)))
-    (test (not (member$ ?p1 ?compb)))
-    (test (not (member$ ?p2 ?compb)))
-    (test (not (member$ ?p3 ?compb)))
+    (test (not (elemento-en-lista ?n2 $?comp1)))
+    (test (not (elemento-en-lista ?n3 $?comp1)))
+    (test (not (elemento-en-lista ?bn $?comp1)))
+    (test (not (elemento-en-lista ?n1 $?comp2)))
+    (test (not (elemento-en-lista ?n3 $?comp2)))
+    (test (not (elemento-en-lista ?bn $?comp2)))
+    (test (not (elemento-en-lista ?n1 $?comp3)))
+    (test (not (elemento-en-lista ?n2 $?comp3)))
+    (test (not (elemento-en-lista ?bn $?comp3)))
+    (test (not (elemento-en-lista ?n1 $?compb)))
+    (test (not (elemento-en-lista ?n2 $?compb)))
+    (test (not (elemento-en-lista ?n3 $?compb)))
     (test (and
         (>= (get-price(create$ ?precio1 ?precio2 ?precio3 ?preciob)) ?min)
         (<= (get-price(create$ ?precio1 ?precio2 ?precio3 ?preciob)) ?max)))
     =>
+    (printout t "Comparando: " ?n2 " con incompatibles del primero: " $?comp1 crlf)
+    (printout t "Resultado: " (elemento-en-lista ?n2 $?comp1) crlf)
     (bind ?menu (make-instance of Menu
                     (tienePrimerPlato ?p1)
                     (tieneSegundoPlato ?p2)
@@ -171,8 +179,7 @@
                     (tieneBebida (create$ ?b))
                     (precio (get-price (create$ ?precio1 ?precio2 ?precio3 ?preciob)))
                     (puntuacion 0.9))))
-    
-    ;(printout t "Menú generado: " (send ?p1 get-nombre) ", " (send ?p2 get-nombre) ", " (send ?p3 get-nombre) ", " (send ?b get-nombre) ", Precio: " (send ?menu get-precio) crlf))
+
 
 (defrule generar-menu-con-varias-bebidas "Genera un menú con una bebida por plato"
     (declare (salience -2))

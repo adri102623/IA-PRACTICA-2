@@ -1,93 +1,85 @@
-;;;MENU LACTOSEFREE
+;;;MENU Japonés
 ;PRIMER PLATO
-([EnsaladaCaprese] of PrimerPlato
-(nombre "Ensalada Caprese")
-(precio 6.0)           ; bajo
-(dificultad 2)         ; media
-(tieneIngredientes [Tomate] [Albahaca] [AceiteOliva] [VinagreBalsamico])
-(esDeTipoComida [Vegetariano] [Frio] [Italiano] [LactoseFree])
-(esAdecuadoParaEvento [Familiar] [Congreso])
-(esIncompatibleCon ))
+([SopaMiso] of PrimerPlato
+    (nombre "Sopa de Miso")
+    (precio 6.5)           ; bajo
+    (dificultad 2)         ; media
+    (tieneIngredientes [Miso] [Tofu] [Alga] [Cebolleta])
+    (esDeTipoComida [Caliente] [Japonés] [Vegetariano])
+    (esAdecuadoParaEvento [Familiar] [Congreso])
+    (esIncompatibleCon ))
 
 ;SEGUNDO PLATO
-([PolloLimon] of SegundoPlato
-(nombre "Pollo al Limón")
-(precio 12.0)          ; medio
-(dificultad 2)         ; media
-(tieneIngredientes [Pollo] [Limon] [Ajo] [AceiteOliva])
-(esDeTipoComida [Caliente] [Clasico] [LactoseFree])
-(esAdecuadoParaEvento [Familiar])
-(esIncompatibleCon ))
+([TeriyakiPollo] of SegundoPlato
+    (nombre "Pollo Teriyaki")
+    (precio 13.0)          ; medio
+    (dificultad 2)         ; media
+    (tieneIngredientes [Pollo] [SalsaSoja] [Azucar] [Jengibre])
+    (esDeTipoComida [Caliente] [Japonés] [Carne])
+    (esAdecuadoParaEvento [Familiar])
+    (esIncompatibleCon ))
 
 ;POSTRE
-([SorbeteMango] of Postre
-(nombre "Sorbete de Mango")
-(precio 4.5)           ; económico
-(dificultad 2)         ; media
-(tieneIngredientes [Mango] [Azucar] [Limon])
-(esDeTipoComida [Dulce] [Frio] [LactoseFree])
-(esAdecuadoParaEvento [Familiar])
-(esIncompatibleCon ))
+([MochiFresa] of Postre
+    (nombre "Mochi de Fresa")
+    (precio 4.5)           ; económico
+    (dificultad 2)         ; media
+    (tieneIngredientes [HarinaArroz] [Azucar] [Fresa])
+    (esDeTipoComida [Dulce] [Japonés])
+    (esAdecuadoParaEvento [Familiar])
+    (esIncompatibleCon ))
 
 ;BEBIDA
-([ZumoNaranja] of Bebida
-(nombre "Zumo de Naranja")
-(precio 2.5)           ; bajo
-(tieneTipoBebida [Zumo])
-(esIncompatibleCon ))
+([TéVerde] of Bebida
+    (nombre "Té Verde")
+    (precio 2.0)           ; bajo
+    (tieneTipoBebida [Cafeina])
+    (esIncompatibleCon ))
 
-;;;INGREDIENTES
-([Tomate] of Ingrediente
-(nombre "Tomate")
-(tieneTipoIngrediente [Verdura])
-(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
-
-([Albahaca] of Ingrediente
-(nombre "Albahaca")
-(tieneTipoIngrediente [Aromatizante])
-(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
-
-([AceiteOliva] of Ingrediente
-(nombre "Aceite de Oliva")
-(tieneTipoIngrediente [Grasa])
-(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
-
-([VinagreBalsamico] of Ingrediente
-(nombre "Vinagre Balsámico")
-(tieneTipoIngrediente [Condimento])
-(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
-
+;INGREDIENTES
+([Miso] of Ingrediente
+    (nombre "Miso")
+    (tieneTipoIngrediente [Salsa])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Tofu] of Ingrediente
+    (nombre "Tofu")
+    (tieneTipoIngrediente [Legumbre])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Alga] of Ingrediente
+    (nombre "Alga")
+    (tieneTipoIngrediente [Verdura])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Cebolleta] of Ingrediente
+    (nombre "Cebolleta")
+    (tieneTipoIngrediente [Verdura])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
 ([Pollo] of Ingrediente
-(nombre "Pollo")
-(tieneTipoIngrediente [Carne])
-(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
-
-([Limon] of Ingrediente
-(nombre "Limón")
-(tieneTipoIngrediente [Fruta])
-(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
-
-([Ajo] of Ingrediente
-(nombre "Ajo")
-(tieneTipoIngrediente [Condimento])
-(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
-
-([Mango] of Ingrediente
-(nombre "Mango")
-(tieneTipoIngrediente [Fruta])
-(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
-
+    (nombre "Pollo")
+    (tieneTipoIngrediente [Carne])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([SalsaSoja] of Ingrediente
+    (nombre "Salsa de Soja")
+    (tieneTipoIngrediente [Salsa])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
 ([Azucar] of Ingrediente
-(nombre "Azúcar")
-(tieneTipoIngrediente [Endulzante])
-(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+    (nombre "Azúcar")
+    (tieneTipoIngrediente [Endulzante])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Jengibre] of Ingrediente
+    (nombre "Jengibre")
+    (tieneTipoIngrediente [Condimento])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([HarinaArroz] of Ingrediente
+    (nombre "Harina de Arroz")
+    (tieneTipoIngrediente [Cereal])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Fresa] of Ingrediente
+    (nombre "Fresa")
+    (tieneTipoIngrediente [Fruta])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
 
-([Naranja] of Ingrediente
-(nombre "Naranja")
-(tieneTipoIngrediente [Fruta])
-(disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
 
-;;;MENU CON LACTOSA
+;MENU NO JAPONÉS 
 ;PRIMER PLATO
 ([Gazpacho] of PrimerPlato
 (nombre "Gazpacho")

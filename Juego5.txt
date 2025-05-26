@@ -1,0 +1,96 @@
+;;;MENU INFANTIL
+;PRIMER PLATO 
+([MacarronesQueso] of PrimerPlato
+    (nombre "Macarrones con Queso")
+    (precio 8.0)           ; medio
+    (dificultad 2)         ; media
+    (tieneIngredientes [PastaI] [Queso] [Leche] [Mantequilla])
+    (esDeTipoComida [Caliente] [Clasico] [Italiano])
+    (esAdecuadoParaEvento [Familiar])
+    (esIncompatibleCon ))
+
+;SEGUNDO PLATO
+([PolloRebozado] of SegundoPlato
+    (nombre "Pollo Rebozado")
+    (precio 12.0)          ; medio
+    (dificultad 2)         ; media
+    (tieneIngredientes [Pollo] [HuevoI] [PanRallado] [AceiteOliva])
+    (esDeTipoComida [Caliente] [Clasico] [Carne])
+    (esAdecuadoParaEvento [Familiar])
+    (esIncompatibleCon ))
+
+;POSTRE
+([PastelChocolate] of Postre
+    (nombre "Pastel de Chocolate")
+    (precio 5.5)           ; económico
+    (dificultad 2)         ; media
+    (tieneIngredientes [Chocolate] [Harina] [Azucar] [HuevoI])
+    (esDeTipoComida [Dulce] [Clasico])
+    (esAdecuadoParaEvento [Familiar])
+    (esIncompatibleCon ))
+
+;BEBIDAS
+([Limonada] of Bebida
+    (nombre "Limonada Casera")
+    (precio 2.5)           ; bajo
+    (tieneTipoBebida [Zumo])
+    (esIncompatibleCon ))
+([Vodka] of Bebida
+    (nombre "Vodka")
+    (precio 6.0)           ; medio
+    (tieneTipoBebida [Alcohol])
+    (esIncompatibleCon ))
+
+;INGREDIENTES
+([PastaI] of Ingrediente
+    (nombre "Pasta")
+    (tieneTipoIngrediente [Pasta])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Queso] of Ingrediente
+    (nombre "Queso")
+    (tieneTipoIngrediente [Lacteo])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Leche] of Ingrediente
+    (nombre "Leche")
+    (tieneTipoIngrediente [Lacteo])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Mantequilla] of Ingrediente
+    (nombre "Mantequilla")
+    (tieneTipoIngrediente [Lacteo])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Pollo] of Ingrediente
+    (nombre "Pollo")
+    (tieneTipoIngrediente [Carne])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([HuevoI] of Ingrediente
+    (nombre "Huevo")
+    (tieneTipoIngrediente [Huevo])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([PanRallado] of Ingrediente
+    (nombre "Pan Rallado")
+    (tieneTipoIngrediente [Pan])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([AceiteOliva] of Ingrediente
+    (nombre "Aceite de Oliva")
+    (tieneTipoIngrediente [Grasa])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Chocolate] of Ingrediente
+    (nombre "Chocolate")
+    (tieneTipoIngrediente [Endulzante])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Harina] of Ingrediente
+    (nombre "Harina")
+    (tieneTipoIngrediente [Cereal])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Azucar] of Ingrediente
+    (nombre "Azúcar")
+    (tieneTipoIngrediente [Endulzante])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([Limon] of Ingrediente
+    (nombre "Limón")
+    (tieneTipoIngrediente [Fruta])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
+([VodkaIng] of Ingrediente
+    (nombre "Vodka")
+    (tieneTipoIngrediente [Liquido])
+    (disponibleEn [Enero] [Febrero] [Marzo] [Abril] [Mayo] [Junio] [Julio] [Agosto] [Septiembre] [Octubre] [Noviembre] [Diciembre]))
