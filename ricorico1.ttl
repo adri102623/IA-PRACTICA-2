@@ -47,14 +47,6 @@ ricorico:esDeTipoComida rdf:type owl:ObjectProperty ;
                         rdfs:comment "Indica a qu tipo de comida pertenee un plato, como por ejemplo si es de carne, pescado, vegetariano... Es útil para aplicar restricciones alimentarias y las clasificaciones culinarias en la elaboración de menús." .
 
 
-###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#organizaEvento
-ricorico:organizaEvento rdf:type owl:ObjectProperty ;
-                        rdfs:subPropertyOf owl:topObjectProperty ;
-                        rdfs:domain ricorico:Usuario ;
-                        rdfs:range ricorico:Evento ;
-                        rdfs:comment "Relación entre un Usuario y el Evento que organiza." .
-
-
 ###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#prohibeIngrediente
 ricorico:prohibeIngrediente rdf:type owl:ObjectProperty ;
                             rdfs:subPropertyOf owl:topObjectProperty ;
@@ -80,9 +72,9 @@ ricorico:prohibeTipoComida rdf:type owl:ObjectProperty ;
 
 
 ###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#tieneBebida
-ricorico:tieneBebida rdf:type owl:ObjectProperty ,
-                             owl:FunctionalProperty ;
+ricorico:tieneBebida rdf:type owl:ObjectProperty ;
                      rdfs:subPropertyOf owl:topObjectProperty ;
+                     rdf:type owl:FunctionalProperty ;
                      rdfs:domain ricorico:Menu ;
                      rdfs:range ricorico:Bebida .
 
@@ -167,33 +159,6 @@ ricorico:tieneTipoIngrediente rdf:type owl:ObjectProperty ;
 #    Data properties
 #################################################################
 
-###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#calorias
-ricorico:calorias rdf:type owl:DatatypeProperty ;
-                  rdfs:subPropertyOf owl:topDataProperty ;
-                  rdf:type owl:FunctionalProperty ;
-                  rdfs:domain ricorico:Ingrediente ;
-                  rdfs:range xsd:integer ;
-                  rdfs:comment "Cantidad de energía que aporta un ingrediente, expresada en kilocalorías (kcal)." .
-
-
-###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#carbohidratos
-ricorico:carbohidratos rdf:type owl:DatatypeProperty ;
-                       rdfs:subPropertyOf owl:topDataProperty ;
-                       rdf:type owl:FunctionalProperty ;
-                       rdfs:domain ricorico:Ingrediente ;
-                       rdfs:range xsd:integer ;
-                       rdfs:comment "Gramos de carbohidratos presentes en un ingrediente o alimento." .
-
-
-###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#colesterol
-ricorico:colesterol rdf:type owl:DatatypeProperty ;
-                    rdfs:subPropertyOf owl:topDataProperty ;
-                    rdf:type owl:FunctionalProperty ;
-                    rdfs:domain ricorico:Ingrediente ;
-                    rdfs:range xsd:integer ;
-                    rdfs:comment "Miligramos de colesterol contenidos en un ingrediente." .
-
-
 ###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#condicionPrecioMax
 ricorico:condicionPrecioMax rdf:type owl:DatatypeProperty ;
                             rdfs:subPropertyOf owl:topDataProperty ;
@@ -219,15 +184,6 @@ ricorico:dificultad rdf:type owl:DatatypeProperty ;
                     rdfs:domain ricorico:Plato ;
                     rdfs:range xsd:integer ;
                     rdfs:comment "Nivel de complejidad en la preparación de un plato, expresado numéricamente." .
-
-
-###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#grasas
-ricorico:grasas rdf:type owl:DatatypeProperty ;
-                rdfs:subPropertyOf owl:topDataProperty ;
-                rdf:type owl:FunctionalProperty ;
-                rdfs:domain ricorico:Ingrediente ;
-                rdfs:range xsd:integer ;
-                rdfs:comment "Gramos de grasas totales presentes en un ingrediente." .
 
 
 ###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#nombre
@@ -263,24 +219,6 @@ ricorico:precio rdf:type owl:DatatypeProperty ;
                             ] ;
                 rdfs:range xsd:float ;
                 rdfs:comment "Precio individual de un plato, bebida o ingrediente." .
-
-
-###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#proteinas
-ricorico:proteinas rdf:type owl:DatatypeProperty ;
-                   rdfs:subPropertyOf owl:topDataProperty ;
-                   rdf:type owl:FunctionalProperty ;
-                   rdfs:domain ricorico:Ingrediente ;
-                   rdfs:range xsd:integer ;
-                   rdfs:comment "Gramos de proteínas contenidos en un ingrediente." .
-
-
-###  http://www.semanticweb.org/daniela/ontologies/2025/4/ricorico#puntuacion
-ricorico:puntuacion rdf:type owl:DatatypeProperty ;
-                    rdfs:subPropertyOf owl:topDataProperty ;
-                    rdf:type owl:FunctionalProperty ;
-                    rdfs:domain ricorico:Menu ;
-                    rdfs:range xsd:float ;
-                    rdfs:comment "Evaluación de calidad o adecuación del menú final, expresada como puntuación numérica." .
 
 
 #################################################################
