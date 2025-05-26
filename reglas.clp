@@ -54,7 +54,7 @@
             (esDeTipoComida $?tipos-plato))
     (test (not (collection-contains-alo-element ?tipos-comida ?tipos-plato)))
     =>
-    ;(printout t "El plato " ?nombre " Ha sido eliminado debido a que no cumplia las preferencias culinarias del usuario." crlf)
+    (printout t "El plato " ?nombre " Ha sido eliminado debido a que no cumplia las preferencias culinarias del usuario." crlf)
     (send ?plato delete))
 
 ;;; Regla para filtrar platos por tipo de comida favorito
@@ -66,7 +66,7 @@
             (esDeTipoComida $?tipos-plato))
     (test (collection-contains-alo-element ?prohibidos ?tipos-plato))
     =>
-    ;(printout t "El plato " ?nombre " Ha sido eliminado debido a que no cumplia las preferencias culinarias del usuario." crlf)
+    (printout t "El plato " ?nombre " Ha sido eliminado debido a que no cumplia las preferencias culinarias del usuario." crlf)
     (send ?plato delete))
 
 
@@ -77,7 +77,7 @@
     ?plato <- (object (is-a Plato) (nombre ?nombre) (tieneIngredientes $?ingredientes))
     (test (collection-contains-alo-element ?prohibidos ?ingredientes))
     =>
-    ;(printout t "Excluyendo " ?nombre " por contener ingredientes prohibidos." crlf)
+    (printout t "Excluyendo " ?nombre " por contener ingredientes prohibidos." crlf)
     (send ?plato delete))
 
 
@@ -89,7 +89,7 @@
             (tieneTipoBebida ?tipo-bebida))
     (test (collection-contains-alo-element ?prohibidos ?tipo-bebida))
     =>
-    ;(printout t "Excluyendo " ?nombre " por contener ingredientes prohibidos." crlf)
+    (printout t "Excluyendo " ?nombre " por contener ingredientes prohibidos." crlf)
     (send ?bebida delete))
 
 ;;; Regla para filtrar por estacionalidad
@@ -105,7 +105,7 @@
     (test (not (member$ ?mes-evento $?meses-ingrediente)))
     (test (elemento-en-lista ?nombre-ingrediente $?ingredientes-plato))
     =>
-    ;(printout t "El plato " ?nombre-plato " Ha sido eliminado debido a que el ingrediente " ?nombre-ingrediente " no se puede obtener en este mes" crlf)
+    (printout t "El plato " ?nombre-plato " Ha sido eliminado debido a que el ingrediente " ?nombre-ingrediente " no se puede obtener en este mes" crlf)
     (send ?plato delete)
     
 )
@@ -120,7 +120,7 @@
             (esAdecuadoParaEvento $?tipos))
     (test (not (member$ ?e ?tipos)))
     =>
-    ;(printout t "El plato " ?nombre-plato " Ha sido eliminado porque no es adeucado para el evento" crlf)
+    (printout t "El plato " ?nombre-plato " Ha sido eliminado porque no es adeucado para el evento" crlf)
     (send ?plato delete))
 
 ;;; Regla para filtrar por dificultad según comensales
@@ -170,8 +170,6 @@
         (>= (get-price(create$ ?precio1 ?precio2 ?precio3 ?preciob)) ?min)
         (<= (get-price(create$ ?precio1 ?precio2 ?precio3 ?preciob)) ?max)))
     =>
-    (printout t "Comparando: " ?n2 " con incompatibles del primero: " $?comp1 crlf)
-    (printout t "Resultado: " (elemento-en-lista ?n2 $?comp1) crlf)
     (bind ?menu (make-instance of Menu
                     (tienePrimerPlato ?p1)
                     (tieneSegundoPlato ?p2)
@@ -196,39 +194,51 @@
                     (esIncompatibleCon $?comp2)
                     (precio ?precio2))
     ?p3 <- (object (is-a Postre)
+                    (nombre ?n3)
                     (esIncompatibleCon $?comp3)
                     (precio ?precio3))
     ?b1 <- (object (is-a Bebida)
+                  (nombre ?bn1)
                   (esIncompatibleCon $?compb1)
                   (precio ?preciob1))
     ?b2 <- (object (is-a Bebida)
+                  (nombre ?bn2)
                   (esIncompatibleCon $?compb2)
                   (precio ?preciob2))
     ?b3 <- (object (is-a Bebida)
+                  (nombre ?bn3)
                   (esIncompatibleCon $?compb3)
                   (precio ?preciob3))
     (test (not (eq ?n1 ?n2)))
     (test (not (eq ?b1 ?b2)))
     (test (not (eq ?b1 ?b3)))
     (test (not (eq ?b2 ?b3)))
-    ; Comprobaciones Plato 1 [Primero] Bebida 1
-    (test (not (member$ ?p1 ?comp2)))
-    (test (not (member$ ?p1 ?comp3)))   
-    (test (not (member$ ?p1 ?compb1)))
-    (test (not (member$ ?b1 ?comp1)))
+    ; Comprobaciones Plato 1 [Primero] 
+    (test (not (elemento-en-lista ?n1 $?comp2)))
+    (test (not (elemento-en-lista ?n1 $?comp3)))   
+    (test (not (elemento-en-lista ?n1 $?compb1)))
+    (test (not (elemento-en-lista ?bn1 $?comp1)))
+    (test (not (elemento-en-lista ?bn2 $?comp1)))
+    (test (not (elemento-en-lista ?bn3 $?comp1)))
 
-    ; Comprobaciones Plato 2 [Segundo] Bebida 2
-    (test (not (member$ ?p2 ?comp1)))
-    (test (not (member$ ?p2 ?comp3)))
-    (test (not (member$ ?p2 ?compb2)))
-    (test (not (member$ ?b2 ?comp2)))
 
-    ; Comprobaciones Plato 3 [Postre] Bebida 3
-    (test (not (member$ ?p3 ?comp1)))
-    (test (not (member$ ?p3 ?comp2)))
-    (test (not (member$ ?p3 ?compb3)))
-    (test (not (member$ ?b3 ?comp3)))
 
+    ; Comprobaciones Plato 2 [Segundo] 
+    (test (not (elemento-en-lista ?n2 $?comp1)))
+    (test (not (elemento-en-lista ?n2 $?comp3)))
+    (test (not (elemento-en-lista ?n2 $?compb2)))
+    (test (not (elemento-en-lista ?bn2 $?comp2)))
+    (test (not (elemento-en-lista ?bn1 $?comp2)))
+    (test (not (elemento-en-lista ?bn3 $?comp2)))
+
+
+    ; Comprobaciones Plato 3 [Postre] 
+    (test (not (elemento-en-lista ?n3 $?comp1)))
+    (test (not (elemento-en-lista ?n3 $?comp2)))
+    (test (not (elemento-en-lista ?n3 $?compb3)))
+    (test (not (elemento-en-lista ?bn3 $?comp3)))
+    (test (not (elemento-en-lista ?bn2 $?comp2)))
+    (test (not (elemento-en-lista ?bn1 $?comp2)))
     (test (and
         (>= (get-price(create$ ?precio1 ?precio2 ?precio3 ?preciob1 ?preciob2 ?preciob3)) ?min)
         (<= (get-price(create$ ?precio1 ?precio2 ?precio3 ?preciob1 ?preciob2 ?preciob3)) ?max)))

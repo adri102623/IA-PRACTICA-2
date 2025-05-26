@@ -3,13 +3,13 @@
 (load reglas.clp)
 (reset)
 (run)
+[Vegetariano] [Caliente] [Clasico] [Español]
+[Frio] [Moderno] [Japonés]
+[Ajo]
+[Enero]
 ninguno
-ninguno
-ninguno
-[Junio]
-ninguno
-2
+1
 [Familiar]
-200
-10
-100
+600
+30
+50
